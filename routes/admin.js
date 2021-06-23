@@ -1,15 +1,13 @@
 const express = require('express');
+const path = require('path');
+
+const rootDir = require('../utils/path');
 
 const router = express.Router();
 
 // (GET)/admin/new-product => New product form
 router.get('/new-product', (req, res, next) => {
-    res.send(`<a href="/">Home</a>
-        <form action="/admin/new-product" method="POST">
-            <label for="name">Product Name</label>
-            <input type="text" name="product" placeholder="Laptop case"/>
-            <button type="submit">Crear</button>
-        </form>`);
+    res.sendFile(path.join(rootDir, 'views', 'new-product.html'));
 });
 
 // (POST)/admin/new-product => Creation of new product and redirect to /
