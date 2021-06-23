@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-// Middleware with url filter (/users)
+// (GET)/admin/new-product => New product form
 router.get('/new-product', (req, res, next) => {
     res.send(`<a href="/">Home</a>
         <form action="/admin/new-product" method="POST">
@@ -12,7 +12,7 @@ router.get('/new-product', (req, res, next) => {
         </form>`);
 });
 
-// Middleware for POST requests at /new-user (simulate user creation)
+// (POST)/admin/new-product => Creation of new product and redirect to /
 router.post('/new-product', (req, res, next) => {
     console.log(req.body);
     res.redirect('/');
