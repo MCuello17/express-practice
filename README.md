@@ -1,15 +1,15 @@
-# Express exercise (v1.3.2)
+# Express exercise (v2.1.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
 
     npm start
 
-Now head into http://localhost:3000 from a browser. You will see a link to the users page.\
-On the users page you should be able to simulate a user creation just by submitting on the form. This should refresh your browser and on your terminal you will have your input information!
+Now head into http://localhost:3000 from a browser. You will see a list of products and a link to **create a new product**.\
+On the `new-product` page you should be able to **simulate a product creation** just by submitting on the form. This should redirect you back to the product list page and **on your terminal** you will have your input information!
 
 **Example output:**
-> `{ name: 'Michael Cuello' }`
+> `{ product: 'Wireless Mouse' }`
 
 ## Versions:
 * **(1.0.0)** Created the project.
@@ -18,6 +18,8 @@ On the users page you should be able to simulate a user creation just by submitt
 * **(1.3.0)** Added `(POST)/new-user` url for simulating user creation.
 * **(1.3.1)** Added comment card for examples on [routing methods](https://expressjs.com/en/api.html#routing-methods).
 * **(1.3.2)** Made the example middleware as a comment card.
+* **(2.0.0)** Changed project from a user database to a shop website.
+* **(2.1.0)** Refactor routes.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
