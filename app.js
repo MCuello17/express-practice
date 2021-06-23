@@ -20,6 +20,9 @@ const app = express();
 // Parser Middleware
 app.use(express.urlencoded({extended: true}));
 
+// Staric files Middleware (public/*)
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(shopRoutes);
 // Filtered router (all routes in router will start with '/admin')
 app.use('/admin', adminRoutes);
