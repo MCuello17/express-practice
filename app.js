@@ -1,6 +1,10 @@
 const express = require('express');
 
+const adminRoutes = require('./routes/admin')
+const shopRoutes = require('./routes/shop')
+
 const app = express();
+
 
 // ---------------------------------------------------
 // MIDDLEWARE SETUP EXAMPLE:
@@ -15,32 +19,8 @@ const app = express();
 // Parser middleware
 app.use(express.urlencoded({extended: true}));
 
-// Middleware with url filter (/users)
-app.use('/users', (req, res, next) => {
-    res.send(`<a href="/">Back</a>
-        <form action="/new-user" method="POST">
-            <label for="name">Full Name</label>
-            <input type="text" name="name" placeholder="Juan Perez"/>
-            <button type="submit">Crear</button>
-        </form>
-        <ul>
-            <li>Juan Perez</li>
-            <li>Lorem Ipsum</li>
-            <li>María Testing</li>
-        </ul>`);
-});
-
-// Middleware for POST requests at /new-user (simulate user creation)
-app.post('/new-user', (req, res, next) => {
-    console.log(req.body);
-    res.redirect('/users');
-});
-
-// Middleware with url filter (/)
-app.use('/', (req, res, next) => {
-    res.send(`<a href="/users">User list</a>
-        <h1>Index Page!</h1>`);
-});
+app.use(adminRoutes);
+app.use(shopRoutes);
 
 // ---------------------------------------------------
 //   OTHER HTTP REQUESTS THAT CAN BE USED WITH APP.:
