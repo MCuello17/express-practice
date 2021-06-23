@@ -1,4 +1,4 @@
-# Express exercise (v2.1.0)
+# Express exercise (v2.2.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -20,6 +20,7 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(1.3.2)** Made the example middleware as a comment card.
 * **(2.0.0)** Changed project from a user database to a shop website.
 * **(2.1.0)** Refactor routes.
+* **(2.2.0)** Routes changes: Added filter to /admin routes and created 404 page for unlisted routes.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)

@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
             <li>Cool Headphones</li>
             <li>Expensive Laptop</li>
             <li>Wireless Keyboard</li>
-            <li><a href="/new-product">Add new</a></li>
+            <li><a href="/admin/new-product">Add new</a></li>
         </ul>`);
 });
 
