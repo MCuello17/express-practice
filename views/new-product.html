@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a new product - My Shop!</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="new-product">
+            <form action="/admin/new-product" method="post">
+                <label for="product-title">Product Title</label>
+                <input id="product-title" type="text" name="product-title" placeholder="Laptop case"/>
+                <button type="submit">Add product</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

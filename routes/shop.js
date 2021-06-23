@@ -1,16 +1,15 @@
 const express = require('express');
+const path = require('path');
+
+const rootDir = require('../utils/path');
 
 const router = express.Router();
 
 // (GET)/ => product list
 router.get('/', (req, res, next) => {
-    res.send(`<h1>Product list:</h1>
-        <ul>
-            <li>Cool Headphones</li>
-            <li>Expensive Laptop</li>
-            <li>Wireless Keyboard</li>
-            <li><a href="/admin/new-product">Add new</a></li>
-        </ul>`);
+    res.sendFile(path.join(rootDir, 'views', 'shop.html'));
+    // Can also be used as:
+    // res.sendFile(path.join(__dirname, '../', 'views', 'shop.html'));
 });
 
 module.exports = router;

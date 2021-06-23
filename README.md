@@ -22,6 +22,7 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(2.1.0)** Refactor routes.
 * **(2.2.0)** Routes changes: Added filter to /admin routes and created 404 page for unlisted routes.
 * **(2.2.1)** Comments updates.
+* **(2.3.0)** Serving HTML files on pages instead of sending the HTML as a string.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
