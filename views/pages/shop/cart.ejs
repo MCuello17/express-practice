@@ -29,6 +29,7 @@
                                 <%= p.productData.currency + p.productData.price %> 
                             </p>
                             <form action="/cart/delete" method="post">
+                                <input type="hidden" name="productId" value="<%= p.productData.id %>">
                                 <button class="button" type="submit">Delete</button>
                             </form>
                         </li>

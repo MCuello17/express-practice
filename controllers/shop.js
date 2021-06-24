@@ -30,3 +30,11 @@ exports.postCart = (req, res, next) => {
     });
     res.redirect('/cart');
 };
+
+exports.postCartDelete = (req, res, next) => {
+    const productId = req.body.productId;
+    Product.findById(productId, product => {
+        Cart.deleteProduct(productId, produc.price);
+        res.redirect('/cart');
+    });
+}
