@@ -30,8 +30,9 @@ On the `new-product` page you should be able to **simulate a product creation** 
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
-* [Nodemon](https://www.npmjs.com/package/nodemon)
 * [ejs](https://www.npmjs.com/package/ejs)
+## Dev Dependencies:
+* [Nodemon](https://www.npmjs.com/package/nodemon)
 
 ## Debug dependencies:
 * **(global)** [Nodemon](https://www.npmjs.com/package/nodemon)
