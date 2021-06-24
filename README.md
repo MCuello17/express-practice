@@ -1,4 +1,4 @@
-# Express exercise (v4.1.0)
+# Express exercise (v4.3.2)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -30,6 +30,10 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(3.0.0)** Restructured the app in a MVC pattern.
 * **(4.0.0)** Refactor of view files.
 * **(4.1.0)** Added new product fields.
+* **(4.2.0)** Added product details page.
+* **(4.3.0)** Added cart model and functionality.
+* **(4.3.1)** Added cart list and styling.
+* **(4.3.2)** Added cart "delete" product functionality.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
