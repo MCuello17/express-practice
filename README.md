@@ -1,4 +1,4 @@
-# Express exercise (v4.0.0)
+# Express exercise (v4.1.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -29,6 +29,7 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(2.6.0)** Added partials for layout elements.
 * **(3.0.0)** Restructured the app in a MVC pattern.
 * **(4.0.0)** Refactor of view files.
+* **(4.1.0)** Added new product fields.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
