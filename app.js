@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
 
-const {router: adminRoutes} = require('./routes/admin')
+const errorController = require('./controllers/errors')
+
+const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 
 const app = express();
@@ -31,11 +33,7 @@ app.use(shopRoutes);
 app.use('/admin', adminRoutes);
 
 // 404 page Middleware 
-app.use((req, res, next) => {
-    res.status(404).render('404', {
-        pageTitle: '404 - My Shop!',
-    });
-});
+app.use(errorController.get404);
 
 // ---------------------------------------------------
 //   OTHER HTTP REQUESTS THAT CAN BE USED WITH APP.:
