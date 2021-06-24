@@ -1,4 +1,4 @@
-# Express exercise (v2.6.0)
+# Express exercise (v3.0.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -27,6 +27,7 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(2.4.0)** Added temporary dynamic data storage.
 * **(2.5.0)** Dynamic data and templating engine ([ejs](https://www.npmjs.com/package/ejs) - [docs](https://ejs.co/#docs)).
 * **(2.6.0)** Added partials for layout elements.
+* **(3.0.0)** Restructured the app in a MVC pattern.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
