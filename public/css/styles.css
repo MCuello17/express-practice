@@ -51,7 +51,7 @@ button.button:hover {
     padding: 0;
     margin: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 #navbar .nav-item {
@@ -99,6 +99,7 @@ button.button:hover {
     transition: .2s ease;
     border-radius: .5rem;
     position: relative;
+    overflow: hidden;
 }
 
 #shop > ul > li.card:hover {
