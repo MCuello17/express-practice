@@ -1,4 +1,4 @@
-# Express exercise (v2.3.1)
+# Express exercise (v2.6.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -13,7 +13,7 @@ On the `new-product` page you should be able to **simulate a product creation** 
 
 ## Versions:
 * **(1.0.0)** Created the project.
-* **(1.1.0)** Added [body parser](https://www.npmjs.com/package/body-parser) dependency.
+* **(1.1.0)** ~~Added [body parser](https://www.npmjs.com/package/body-parser) dependency~~. [**1.2.0**]
 * **(1.2.0)** Removed [body parser](https://www.npmjs.com/package/body-parser) dependency since it was deprecated ([docs](http://expressjs.com/en/5x/api.html#express.urlencoded)).
 * **(1.3.0)** Added `(POST)/new-user` url for simulating user creation.
 * **(1.3.1)** Added comment card for examples on [routing methods](https://expressjs.com/en/api.html#routing-methods).
@@ -24,9 +24,14 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(2.2.1)** Comments updates.
 * **(2.3.0)** Serving HTML files on pages instead of sending the HTML as a string.
 * **(2.3.1)** Added styling and static files middleware.
+* **(2.4.0)** Added temporary dynamic data storage.
+* **(2.5.0)** Dynamic data and templating engine ([ejs](https://www.npmjs.com/package/ejs) - [docs](https://ejs.co/#docs)).
+* **(2.6.0)** Added partials for layout elements.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
+* [ejs](https://www.npmjs.com/package/ejs)
+## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 
 ## Debug dependencies:

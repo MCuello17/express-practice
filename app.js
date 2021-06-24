@@ -1,11 +1,14 @@
 const express = require('express');
 const path = require('path');
 
-const adminRoutes = require('./routes/admin')
+const {router: adminRoutes} = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 
 const app = express();
 
+// Templating engine setup
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
 // ---------------------------------------------------
 // MIDDLEWARE SETUP EXAMPLE:
@@ -29,7 +32,9 @@ app.use('/admin', adminRoutes);
 
 // 404 page Middleware 
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+    res.status(404).render('404', {
+        pageTitle: '404 - My Shop!',
+    });
 });
 
 // ---------------------------------------------------
