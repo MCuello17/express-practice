@@ -11,11 +11,18 @@ module.exports = class Product {
     }
 
     save() {
+        this.id = Math.random().toString();
         products.push(this);
     }
 
     static fetchAll(callback) {
         callback(products);
         return products;
+    }
+
+    static findById(id, callback) {
+        const product = products.find(p => p.id === id);
+        callback(product);
+        return product;
     }
 }

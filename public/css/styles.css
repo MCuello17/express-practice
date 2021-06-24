@@ -15,6 +15,28 @@ main {
     justify-content: center;
     text-align: center;
 }
+
+section {
+    width: 100%;
+    max-width: 1250px;
+}
+
+button.button {
+    border-radius: .5rem;
+    text-decoration: none;
+    border: 1px solid #000;
+    background: #000;
+    padding: .5rem 1rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+button.button:hover {
+    box-shadow: 0px 0 5px 0px #e8e8e8;
+    background-color: #fff;
+    color: #000;
+    border-color: #e8e8e8;
+}
 /* --- [/GENERAL] --- */
 
 /* --- [NAVIGATION] --- */
@@ -59,11 +81,6 @@ main {
 /* --- [/NAVIGATION] --- */
 
 /* --- [PRODUCT LIST] --- */
-#shop {
-    width: 100%;
-    max-width: 1250px;
-}
-
 #shop > ul {
     width: 100%;
     list-style: none;
@@ -234,23 +251,6 @@ main {
 #new-product .form-control > select:focus {
     border: 1px solid #000;
     box-shadow: 0px 0 5px 0px #e8e8e8;
-}
-
-#new-product button {
-    border-radius: .5rem;
-    text-decoration: none;
-    border: 1px solid #000;
-    background: #000;
-    padding: .5rem 1rem;
-    color: #fff;
-    cursor: pointer;
-}
-
-#new-product button:hover {
-    box-shadow: 0px 0 5px 0px #e8e8e8;
-    background-color: #fff;
-    color: #000;
-    border-color: #e8e8e8;
 }
 
     /* Small devices (landscape phones, 576px and up) */
