@@ -10,7 +10,7 @@ const app = express();
 
 // Templating engine setup
 app.set('view engine', 'ejs');
-app.set('views', 'views');
+app.set('views', 'views/pages');
 
 // ---------------------------------------------------
 // MIDDLEWARE SETUP EXAMPLE:

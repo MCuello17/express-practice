@@ -59,19 +59,73 @@ main {
 /* --- [/NAVIGATION] --- */
 
 /* --- [PRODUCT LIST] --- */
+#shop {
+    width: 100%;
+}
+
 #shop > ul {
+    width: 100%;
     list-style: none;
     margin: 1rem 0 2rem;
     padding: 0;
     text-align: left;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
 }
 
-#shop > ul > li {
-    margin: 1rem;
+#shop > ul > li.card {
     border-radius: .2rem;
-    padding: .5rem 1rem;
     border: 1px solid #e8e8e8;
+    box-shadow: 0px 0 5px 0px #e8e8e8;
+    transition: .2s ease;
+    border-radius: .5rem;
+    position: relative;
+}
+
+#shop > ul > li.card:hover {
+    box-shadow: 0px 0 15px 0px #b8b8b8;
+}
+
+#shop .card .card-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: .2rem .5rem;
+    background-color: #000;
+    color: #fff;
+    border-bottom-right-radius: .5rem;
+}
+
+#shop .card .card-link {
+    text-decoration: none;
+    font: inherit;
+    color: inherit;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#shop .card .card-image {
+    width: 100%;
+}
+
+#shop .card .card-title {
+    margin: .5rem 0;
+    padding: .2rem .5rem;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+#shop .card .card-description {
+    margin: .5rem 0 1rem;
+    padding: .2rem .5rem;
+}
+
+#shop .card .card-footer {
+    border-top: 1px solid #e8e8e8;
+    padding: 1rem .5rem;
+    text-align: center;
+    margin-top: auto;
 }
 
 #shop a.button {
@@ -116,15 +170,46 @@ main {
     padding: .5rem 0;
 }
 
-#new-product .form-control > input {
+#new-product .form-control > input,
+#new-product .form-control > textarea,
+#new-product .form-control select {
     padding: .5rem 1rem;
     border-radius: 1rem;
     border: 1px solid #e8e8e8;
     overflow: hidden;
     outline: 0;
+    width: 100%;
 }
 
-#new-product .form-control > input:focus {
+#new-product .form-control select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#new-product .form-control .custom-select {
+    position: relative;
+}
+
+#new-product .form-control .custom-select::after {
+    content: "";
+    position: absolute;
+    top: 30%;
+    right: 1rem;
+    width: .5rem;
+    height: .5rem;
+    border-bottom: 1px solid #000;
+    border-right: 1px solid #000;
+    transform: rotate(45deg);
+}
+
+#new-product .form-control > textarea {
+    resize: vertical;
+}
+
+#new-product .form-control > input:focus,
+#new-product .form-control > textarea:focus,
+#new-product .form-control > select:focus {
     border: 1px solid #000;
     box-shadow: 0px 0 5px 0px #e8e8e8;
 }

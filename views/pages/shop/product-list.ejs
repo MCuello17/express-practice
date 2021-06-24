@@ -1,0 +1,36 @@
+<%- include('../../partials/layout/head.ejs') %>
+<body>
+    <%- include('../../partials/layout/navbar.ejs') %>
+    <main>
+        <section id="shop">
+            <% if (products.length > 0) { %> 
+                <h1>Product list:</h1>
+                <ul>
+                    <% for (const product of products) { %>
+                        <li class="card">
+                            <div class="card-label">
+                                Stock: <%= product.stock || 0 %>
+                            </div>
+                            <a class="card-link" href="">
+                                <img class="card-image" src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                                <h4 class="card-title">
+                                    <%= product.title %>
+                                </h4>
+                                <p class="card-description">
+                                    <%= product.description %>
+                                </p>
+                                <div class="card-footer">
+                                    <%= product.currency + product.price %>
+                                </div>
+                            </a>
+                        </li>
+                    <% } %> 
+                </ul>
+            <% } else { %>
+                <h1>There are no products! D:</h1>
+            <% } %> 
+            <a class="button" href="/admin/new-product">Add new</a>
+        </section>
+    </main>
+</body>
+<%- include('../../partials/layout/footer.ejs') %> 
