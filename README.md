@@ -25,7 +25,7 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(2.3.0)** Serving HTML files on pages instead of sending the HTML as a string.
 * **(2.3.1)** Added styling and static files middleware.
 * **(2.4.0)** Added temporary dynamic data storage.
-* **(2.5.0)** Dynamic data and templating engine ([ejs](https://www.npmjs.com/package/ejs)).
+* **(2.5.0)** Dynamic data and templating engine ([ejs](https://www.npmjs.com/package/ejs) - [docs](https://ejs.co/#docs)).
 * **(2.6.0)** Added partials for layout elements.
 
 ## Dependencies:
