@@ -9,7 +9,8 @@ module.exports = class Product {
         products.push(this);
     }
 
-    static fetchAll() {
+    static fetchAll(callback) {
+        callback(products);
         return products;
     }
 }
