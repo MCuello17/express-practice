@@ -61,6 +61,7 @@ main {
 /* --- [PRODUCT LIST] --- */
 #shop {
     width: 100%;
+    max-width: 1250px;
 }
 
 #shop > ul {
@@ -70,7 +71,7 @@ main {
     padding: 0;
     text-align: left;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
 }
 
@@ -143,6 +144,27 @@ main {
     background-color: #fff;
     border-color: #000;
 }
+
+    /* Small devices (landscape phones, 576px and up) */
+    @media (min-width: 576px) {
+        #shop > ul {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    /* Medium devices (tablets, 768px and up) */
+    @media (min-width: 768px) {
+        #shop > ul {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    /* Large devices (desktops, 992px and up) */
+    @media (min-width: 992px) {}
+    /* Extra large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {
+        #shop > ul {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
 
 /* --- [/PRODUCT LIST] --- */
 
