@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= (typeof pageTitle !== 'undefined') ? pageTitle : 'My Shop!' %></title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
+<%- include('partials/head.ejs') %>
 <body>
-    <header>
-        <nav id="navbar">
-            <ul class="nav-container">
-                <li class="nav-item"><a href="/">Home</a></li>
-            </ul>
-        </nav>
-    </header>
+    <%- include('partials/navbar.ejs') %>
     <main>
         <section id="error">
             <h1>404</h1>
@@ -22,4 +8,4 @@
         </section>
     </main>
 </body>
-</html>
+<%- include('partials/footer.ejs') %> 
