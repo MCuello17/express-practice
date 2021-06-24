@@ -1,4 +1,4 @@
-# Express exercise (v2.4.0)
+# Express exercise (v2.5.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -25,10 +25,12 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(2.3.0)** Serving HTML files on pages instead of sending the HTML as a string.
 * **(2.3.1)** Added styling and static files middleware.
 * **(2.4.0)** Added temporary dynamic data storage.
+* **(2.5.0)** Dynamic data and templating engine ([ejs](https://www.npmjs.com/package/ejs)).
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
 * [Nodemon](https://www.npmjs.com/package/nodemon)
+* [ejs](https://www.npmjs.com/package/ejs)
 
 ## Debug dependencies:
 * **(global)** [Nodemon](https://www.npmjs.com/package/nodemon)
