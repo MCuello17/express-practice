@@ -1,4 +1,14 @@
-const products = []
+const products = [
+    {
+        id: "1",
+        title: "Sample product",
+        imageUrl: "https://www.zdnet.com/a/hub/i/2021/02/28/7687e3eb-9509-4a63-8efc-bb7a4048e818/framework-laptop-modular-upgrade-upgradeable-repair-notebook.jpg",
+        description: "This is a sample product.",
+        currency: "$",
+        price: "1500",
+        stock: "5",
+    }
+]
 
 module.exports = class Product {
     constructor(title, imageUrl, description, currency, price, stock) {

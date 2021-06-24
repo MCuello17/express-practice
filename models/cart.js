@@ -25,5 +25,20 @@ module.exports = class Cart {
         console.log(cart);
     }
 
+    static deleteProduct(id, productPrice) {
+        const updatedCart = {...cart};
+        const product = updatedCart.products.find(prod => prod.id === id);
+        if (!product) return;
+        const productQty = product.qty;
+
+        cart.products = updatedCart.products.filter(prod => prod.id !== id);
+
+        cart.totalPrice = cart.totalPrice - (productPrice * productQty);
+    }
+
+    static getCart (callback) {
+        if (!cart.products) callback(null);
+        callback(cart);
+    }
 
 }

@@ -3,7 +3,43 @@
     <%- include('../../partials/layout/navbar.ejs') %>
     <main>
         <section id="cart">
-            <h1>Cart!</h1>
+            <h1>Cart</h1>
+            <% if (products.length > 0) { %>
+                <ul class="cart-list">
+                    <li class="cart-item cart-header">
+                        <p class="item-title">
+                            Product
+                        </p>
+                        <p class="item-quantity">
+                            Amount
+                        </p>
+                        <p class="item-price">
+                            Price
+                        </p>
+                    </li>
+                    <% products.forEach(p => { %>
+                        <li class="cart-item">
+                            <a href="/products/<%= p.productData.id %>" class="item-title">
+                                <%= p.productData.title %>
+                            </a>
+                            <p class="item-quantity">
+                                (<%= p.qty %>)
+                            </p>
+                            <p class="item-price">
+                                <%= p.productData.currency + p.productData.price %> 
+                            </p>
+                            <form action="/cart/delete" method="post">
+                                <button class="button" type="submit">Delete</button>
+                            </form>
+                        </li>
+                    <% }); %>
+                </ul>
+                <p class="cart-total">
+                    Total: <b>$<%= price %></b>
+                </p>
+            <% } else { %>
+                <h2>Your cart is empty</h2>
+            <% } %> 
         </section>
     </main>
 </body>
