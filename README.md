@@ -39,6 +39,7 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(5.2.0)** Retrieving products with Sequelize.
 * **(5.2.1)** Added product editing functionality.
 * **(5.2.2)** Product deletion.
+* **(5.3.0)** Added User model.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
