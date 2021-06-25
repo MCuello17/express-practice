@@ -315,6 +315,12 @@ section {
     height: auto;
     max-height: 20rem;
 }
+
+#product .product-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
 /* --- [/PRODUCT] --- */
 
 /* --- [404] --- */

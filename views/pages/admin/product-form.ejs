@@ -5,7 +5,7 @@
         <section id="new-product">
             <h1>Add new product</h1>
             <form
-                <% if (product) { %>
+                <% if (typeof product !== 'undefined') { %>
                     action="/admin/edit-product"
                 <% } else { %>
                     action="/admin/new-product"
@@ -15,7 +15,7 @@
                     <label for="product-title">Title</label>
                     <input
                         id="product-title"
-                        <% if (product) { %>
+                        <% if (typeof product !== 'undefined') { %>
                             value="<%= product.title %>"
                         <% } %>
                         type="text"
@@ -26,7 +26,7 @@
                     <label for="product-image">Image URL</label>
                     <input
                         id="product-image"
-                        <% if (product) { %>
+                        <% if (typeof product !== 'undefined') { %>
                             value="<%= product.imageUrl %>"
                         <% } %>
                         type="text"
@@ -38,7 +38,7 @@
                     <div class="custom-select">
                         <select name="currency" id="product-currency">
                             <option
-                                <% if (product) { %>
+                                <% if (typeof product !== 'undefined') { %>
                                     <%= product.currency === '$' ? 'selected' : '' %> 
                                 <% } %>
                                 value="$">
@@ -51,7 +51,7 @@
                     <label for="product-price">Price</label>
                     <input
                         id="product-price"
-                        <% if (product) { %>
+                        <% if (typeof product !== 'undefined') { %>
                             value="<%= product.price %>"
                         <% } %>
                         type="number"
@@ -66,20 +66,20 @@
                         name="description"
                         cols="30"
                         rows="5"
-                        placeholder="Black case for 13 inches laptops"><% if (product) { %><%= product.description %><% } %></textarea>
+                        placeholder="Black case for 13 inches laptops"><% if (typeof product !== 'undefined') { %><%= product.description %><% } %></textarea>
                 </div>
                 <div class="form-control">
                     <label for="product-stock">Stock</label>
                     <input
                         id="product-stock"
-                        <% if (product) { %>
+                        <% if (typeof product !== 'undefined') { %>
                             value="<%= product.stock %>"
                         <% } %>
                         type="number"
                         name="stock"
                         placeholder="11"/>
                 </div>
-                <% if (product) { %>
+                <% if (typeof product !== 'undefined') { %>
                     <input name="productId" type="hidden" value="<%= product.id %>"/>
                     <button class="button" type="submit">Edit product</button>
                 <% } else { %>

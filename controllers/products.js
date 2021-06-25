@@ -17,7 +17,6 @@ exports.postAddProduct = (req, res, next) => {
         stock: stock,
     })
     .then(result => {
-        console.log(result);
         res.redirect('/')
     })
     .catch(err => console.log(err));
@@ -44,7 +43,6 @@ exports.getProduct = (req, res, next) => {
                 pageTitle: '404 - My Shop!',
             });
         }
-        console.log(product);
         res.render('shop/product-details', {
             pageTitle: product.title,
             product: product,
@@ -82,8 +80,20 @@ exports.postEditProduct = (req, res, next) => {
         return product.save();
     })
     .then(product => {
-        console.log(product);
         res.redirect(`/products/${ product.id }`);
     })
     .catch(err => console.log(err))
 };
+
+exports.postDeleteProduct = (req, res, next) => {
+    const productId = req.body.productId;
+    Product.findByPk(productId)
+    .then(product => {
+        return product.destroy();
+    })
+    .then(product => {
+        res.redirect('/');
+    })
+    .catch(err => console.log(err))
+};
+
