@@ -81,8 +81,9 @@ exports.postEditProduct = (req, res, next) => {
         product.stock = stock;
         return product.save();
     })
-    .then(() => {
-        res.redirect('/');
+    .then(product => {
+        console.log(product);
+        res.redirect(`/products/${ product.id }`);
     })
     .catch(err => console.log(err))
 };
