@@ -1,14 +1,4 @@
-const products = [
-    {
-        id: "1",
-        title: "Sample product",
-        imageUrl: "https://www.zdnet.com/a/hub/i/2021/02/28/7687e3eb-9509-4a63-8efc-bb7a4048e818/framework-laptop-modular-upgrade-upgradeable-repair-notebook.jpg",
-        description: "This is a sample product.",
-        currency: "$",
-        price: "1500",
-        stock: "5",
-    }
-]
+const db = require('../utils/database');
 
 module.exports = class Product {
     constructor(title, imageUrl, description, currency, price, stock) {
@@ -21,18 +11,21 @@ module.exports = class Product {
     }
 
     save() {
-        this.id = Math.random().toString();
-        products.push(this);
+        return db.execute('INSERT INTO products (title, price, currency, imageUrl, description) VALUES (?, ?, ?, ?, ?)',
+        [
+            this.title,
+            this.price,
+            this.currency,
+            this.imageUrl,
+            this.description,
+        ]);
     }
 
-    static fetchAll(callback) {
-        callback(products);
-        return products;
+    static fetchAll() {
+        return db.execute('SELECT * FROM products');
     }
 
-    static findById(id, callback) {
-        const product = products.find(p => p.id === id);
-        callback(product);
-        return product;
+    static findById(id) {
+        return db.execute(`SELECT * FROM products WHERE id = ?`, [id]);
     }
 }
