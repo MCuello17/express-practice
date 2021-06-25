@@ -1,4 +1,4 @@
-# Express exercise (v5.4.1)
+# Express exercise (v5.5.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -39,10 +39,9 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(5.2.0)** Retrieving products with Sequelize.
 * **(5.2.1)** Added product editing functionality.
 * **(5.2.2)** Product deletion.
-* **(5.3.0)** Added User model.
-* **(5.3.1)** Product deletion and edition based on User.
-* **(5.4.0)** Added cart model.
-* **(5.4.1)** Add and delete products in cart.
+* **(5.3.0)** Added User model and functionality.
+* **(5.4.0)** Added cart model and functionality.
+* **(5.5.0)** Added order model and functionality.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)

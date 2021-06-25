@@ -35,6 +35,11 @@
                         </li>
                     <% }); %>
                 </ul>
+                <form action="/checkout" method="POST">
+                    <button class="button" type="submit">
+                        Checkout
+                    </button>
+                </form>
                 <!-- <p class="cart-total">
                     Total: <b>$<%= (typeof price !== 'undefined') ? price : '' %></b>
                 </p> -->

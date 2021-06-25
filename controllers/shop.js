@@ -1,4 +1,3 @@
-const Cart = require("../models/cart");
 const Product = require("../models/product");
 
 exports.getCart = (req, res, next) => {
@@ -64,4 +63,39 @@ exports.postCartDelete = (req, res, next) => {
             res.redirect('/cart');
         })
         .catch(err => console.log(err))
-}
+};
+
+exports.getOrders = (req, res, next) => {
+    res.redirect('/');
+};
+
+exports.postCheckout = (req, res, next) => {
+    let fetchedProducts;
+    let fetchecCart;
+    req.user
+        .getCart()
+        .then(cart => {
+            fetchecCart = cart;
+            return cart.getProducts();
+        })
+        .then(products => {
+            fetchedProducts = products;
+            return req.user.createOrder();
+        })
+        .then (order => {
+            return order.addProducts(fetchedProducts.map(product => {
+                product.orderItem = {
+                    quantity: product.cartItem.quantity,
+                    totalPrice: product.cartItem.totalPrice,
+                };
+                return product;
+            }));
+        })
+        .then (result => {
+            return fetchecCart.setProducts(null);
+        })
+        .then (result => {
+            res.redirect('/orders');
+        })
+        .catch(err => console.log(err))
+};

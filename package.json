@@ -1,6 +1,6 @@
 {
   "name": "express-practice",
-  "version": "5.2.0",
+  "version": "5.5.0",
   "description": "Express practice excersise!",
   "main": "app.js",
   "dependencies": {
