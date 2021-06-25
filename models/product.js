@@ -1,38 +1,41 @@
-const products = [
-    {
-        id: "1",
-        title: "Sample product",
-        imageUrl: "https://www.zdnet.com/a/hub/i/2021/02/28/7687e3eb-9509-4a63-8efc-bb7a4048e818/framework-laptop-modular-upgrade-upgradeable-repair-notebook.jpg",
-        description: "This is a sample product.",
-        currency: "$",
-        price: "1500",
-        stock: "5",
-    }
-]
+const { Sequelize } = require('sequelize');
 
-module.exports = class Product {
-    constructor(title, imageUrl, description, currency, price, stock) {
-        this.title = title;
-        this.imageUrl = imageUrl;
-        this.description = description;
-        this.currency = currency;
-        this.price = price;
-        this.stock = stock;
-    }
+const sequelize = require('../utils/database');
 
-    save() {
-        this.id = Math.random().toString();
-        products.push(this);
-    }
+const Product = sequelize.define('product', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
+    },
+    // title: Sequelize.STRING,
+    title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    price: {
+        type: Sequelize.DOUBLE,
+        allowNull: false,
+    },
+    currency: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: '$',
+    },
+    imageUrl: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    description: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    stock: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
+});
 
-    static fetchAll(callback) {
-        callback(products);
-        return products;
-    }
-
-    static findById(id, callback) {
-        const product = products.find(p => p.id === id);
-        callback(product);
-        return product;
-    }
-}
+module.exports = Product;

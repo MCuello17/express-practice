@@ -1,0 +1,92 @@
+<%- include('../../partials/layout/head.ejs') %> 
+<body>
+    <%- include('../../partials/layout/navbar.ejs') %>
+    <main>
+        <section id="new-product">
+            <h1>Add new product</h1>
+            <form
+                <% if (typeof product !== 'undefined') { %>
+                    action="/admin/edit-product"
+                <% } else { %>
+                    action="/admin/new-product"
+                <% } %>
+                method="post">
+                <div class="form-control">
+                    <label for="product-title">Title</label>
+                    <input
+                        id="product-title"
+                        <% if (typeof product !== 'undefined') { %>
+                            value="<%= product.title %>"
+                        <% } %>
+                        type="text"
+                        name="title"
+                        placeholder="Laptop bag"/>
+                </div>
+                <div class="form-control">
+                    <label for="product-image">Image URL</label>
+                    <input
+                        id="product-image"
+                        <% if (typeof product !== 'undefined') { %>
+                            value="<%= product.imageUrl %>"
+                        <% } %>
+                        type="text"
+                        name="imageUrl"
+                        placeholder="https://image.freepik.com/free-vector/vector-set-laptop-laptop-bag_60352-1108.jpg"/>
+                </div>
+                <div class="form-control">
+                    <label for="product-currency">Currency</label>
+                    <div class="custom-select">
+                        <select name="currency" id="product-currency">
+                            <option
+                                <% if (typeof product !== 'undefined') { %>
+                                    <%= product.currency === '$' ? 'selected' : '' %> 
+                                <% } %>
+                                value="$">
+                                USD
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-control">
+                    <label for="product-price">Price</label>
+                    <input
+                        id="product-price"
+                        <% if (typeof product !== 'undefined') { %>
+                            value="<%= product.price %>"
+                        <% } %>
+                        type="number"
+                        step=".01"
+                        name="price"
+                        placeholder="1500"/>
+                </div>
+                <div class="form-control">
+                    <label for="product-description">Description</label>
+                    <textarea
+                        id="product-description"
+                        name="description"
+                        cols="30"
+                        rows="5"
+                        placeholder="Black case for 13 inches laptops"><% if (typeof product !== 'undefined') { %><%= product.description %><% } %></textarea>
+                </div>
+                <div class="form-control">
+                    <label for="product-stock">Stock</label>
+                    <input
+                        id="product-stock"
+                        <% if (typeof product !== 'undefined') { %>
+                            value="<%= product.stock %>"
+                        <% } %>
+                        type="number"
+                        name="stock"
+                        placeholder="11"/>
+                </div>
+                <% if (typeof product !== 'undefined') { %>
+                    <input name="productId" type="hidden" value="<%= product.id %>"/>
+                    <button class="button" type="submit">Edit product</button>
+                <% } else { %>
+                    <button class="button" type="submit">Add product</button>
+                <% } %>
+            </form>
+        </section>
+    </main>
+</body>
+<%- include('../../partials/layout/footer.ejs') %> 

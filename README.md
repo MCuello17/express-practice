@@ -1,4 +1,4 @@
-# Express exercise (v4.3.2)
+# Express exercise (v5.5.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -34,12 +34,25 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(4.3.0)** Added cart model and functionality.
 * **(4.3.1)** Added cart list and styling.
 * **(4.3.2)** Added cart "delete" product functionality.
+* **(5.0.0)** Added [mysql2](https://www.npmjs.com/package/mysql2) dependency for database functionality.
+* **(5.1.0)** Added [sequelize](https://www.npmjs.com/package/sequelize) dependency ([docs](https://sequelize.org/master/)).
+* **(5.2.0)** Retrieving products with Sequelize.
+* **(5.2.1)** Added product editing functionality.
+* **(5.2.2)** Product deletion.
+* **(5.3.0)** Added User model and functionality.
+* **(5.4.0)** Added cart model and functionality.
+* **(5.5.0)** Added order model and functionality.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
+* [sequelize](https://www.npmjs.com/package/sequelize) 
+* [mysql2](https://www.npmjs.com/package/mysql2)
 * [ejs](https://www.npmjs.com/package/ejs)
 ## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 
 ## Debug dependencies:
 * **(global)** [Nodemon](https://www.npmjs.com/package/nodemon)
+
+## Database setup:
+On `/utils/database.js` you can find all the database configuration. By default I'm using a MySQL Schema called "**express-practice**".

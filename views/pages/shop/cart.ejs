@@ -11,33 +11,38 @@
                             Product
                         </p>
                         <p class="item-quantity">
-                            Amount
+                            Quantity
                         </p>
                         <p class="item-price">
                             Price
                         </p>
                     </li>
-                    <% products.forEach(p => { %>
+                    <% products.forEach(product => { %>
                         <li class="cart-item">
-                            <a href="/products/<%= p.productData.id %>" class="item-title">
-                                <%= p.productData.title %>
+                            <a href="/products/<%= product.id %>" class="item-title">
+                                <%= product.title %>
                             </a>
                             <p class="item-quantity">
-                                (<%= p.qty %>)
+                                (<%= product.cartItem.quantity %>)
                             </p>
                             <p class="item-price">
-                                <%= p.productData.currency + p.productData.price %> 
+                                <%= product.currency + product.cartItem.totalPrice %> 
                             </p>
                             <form action="/cart/delete" method="post">
-                                <input type="hidden" name="productId" value="<%= p.productData.id %>">
+                                <input type="hidden" name="productId" value="<%= product.id %>">
                                 <button class="button" type="submit">Delete</button>
                             </form>
                         </li>
                     <% }); %>
                 </ul>
-                <p class="cart-total">
-                    Total: <b>$<%= price %></b>
-                </p>
+                <form action="/checkout" method="POST">
+                    <button class="button" type="submit">
+                        Checkout
+                    </button>
+                </form>
+                <!-- <p class="cart-total">
+                    Total: <b>$<%= (typeof price !== 'undefined') ? price : '' %></b>
+                </p> -->
             <% } else { %>
                 <h2>Your cart is empty</h2>
             <% } %> 

@@ -1,10 +1,17 @@
 const express = require('express');
 const path = require('path');
 
-const errorController = require('./controllers/errors')
+const errorController = require('./controllers/errors');
+const sequelize = require('./utils/database');
+const Product = require('./models/product');
+const User = require('./models/user');
+const Cart = require('./models/cart');
 
-const adminRoutes = require('./routes/admin')
-const shopRoutes = require('./routes/shop')
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+const CartItem = require('./models/cart-item');
+const Order = require('./models/order');
+const OrderItem = require('./models/order-item');
 
 const app = express();
 
@@ -28,6 +35,16 @@ app.use(express.urlencoded({extended: true}));
 // Staric files Middleware (public/*)
 app.use(express.static(path.join(__dirname, 'public')));
 
+// User Middleware
+app.use((req, res, next) => {
+    User.findByPk(1)
+    .then(user => {
+        // Global user in the request
+        req.user = user;
+        next();
+    }).catch(err => console.log(err));
+});
+
 app.use(shopRoutes);
 // Filtered router (all routes in router will start with '/admin')
 app.use('/admin', adminRoutes);
@@ -47,5 +64,48 @@ app.use(errorController.get404);
 // ---------------------------------------------------
 
 const port = 3000;
-app.listen(port);
-console.log(`Listening on port ${port}`);
+
+// Relate models
+Product.belongsTo(User, {
+    constraints: true,
+    onDelete: 'CASCADE'
+});
+User.hasMany(Product);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, {through: CartItem});
+Product.belongsToMany(Cart, {through: CartItem});
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, {through: OrderItem});
+Product.belongsToMany(Order, {through: OrderItem});
+
+// Enable auto-creation of tables for models
+sequelize.sync({
+    // force: true // To force new changes
+// ---------------------------------------------------
+//   CREATING A USER MANUALLY:
+// ---------------------------------------------------
+}).then(result => {
+
+    // console.log(result);
+    return User.findByPk(1);
+    
+}).then(user => {
+    if (!user) {
+        return User.create({
+            name: "Michael",
+            email: "michael@test.com"
+        });
+    }
+    return Promise.resolve(user);
+    
+}).then(user => {
+    user.createCart();
+// ---------------------------------------------------
+}).then(cart => {
+    // console.log(user);
+    app.listen(port);
+    console.log(`Listening on port ${port}`);
+})
+.catch(err => console.log(err));
