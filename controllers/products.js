@@ -1,7 +1,7 @@
 const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
-    res.render('admin/new-product', {
+    res.render('admin/product-form', {
         pageTitle: 'Create a new product - My Shop!',
     });
 }
@@ -51,4 +51,38 @@ exports.getProduct = (req, res, next) => {
         });
     })
     .catch(err => {console.log(err)});
+};
+
+exports.getEditProduct = (req, res, next) => {
+    const productId = req.params.productId;
+    Product.findByPk(productId)
+    .then(product => {
+        if (!product) {
+            return res.redirect('/admin/new-product');
+        }
+        res.render('admin/product-form', {
+            pageTitle: 'Create a new product - My Shop!',
+            product: product
+        });
+    })
+    .catch(err => {console.log(err)});
+};
+
+
+exports.postEditProduct = (req, res, next) => {
+    const {productId, title, imageUrl, description, currency, price, stock} = req.body;
+    Product.findByPk(productId)
+    .then(product => {
+        product.title = title;
+        product.imageUrl = imageUrl;
+        product.description = description;
+        product.currency = currency;
+        product.price = price;
+        product.stock = stock;
+        return product.save();
+    })
+    .then(() => {
+        res.redirect('/');
+    })
+    .catch(err => console.log(err))
 };
