@@ -53,17 +53,18 @@ exports.getProduct = (req, res, next) => {
 
 exports.getEditProduct = (req, res, next) => {
     const productId = req.params.productId;
-    Product.findByPk(productId)
-    .then(product => {
-        if (!product) {
-            return res.redirect('/admin/new-product');
-        }
-        res.render('admin/product-form', {
-            pageTitle: 'Create a new product - My Shop!',
-            product: product
-        });
-    })
-    .catch(err => {console.log(err)});
+    req.user
+        .getProducts({where: {id: productId}})
+        .then(([product]) => {
+            if (!product) {
+                return res.redirect('/admin/new-product');
+            }
+            res.render('admin/product-form', {
+                pageTitle: 'Create a new product - My Shop!',
+                product: product
+            });
+        })
+        .catch(err => {console.log(err)});
 };
 
 
@@ -87,13 +88,15 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
     const productId = req.body.productId;
-    Product.findByPk(productId)
-    .then(product => {
-        return product.destroy();
-    })
-    .then(product => {
-        res.redirect('/');
-    })
-    .catch(err => console.log(err))
+    req.user
+        .getProducts({where: {id: productId}})
+        .then(([product]) => {
+            if (!product) res.redirect('/');
+            return product.destroy();
+        })
+        .then(product => {
+            res.redirect('/');
+        })
+        .catch(err => console.log(err))
 };
 
