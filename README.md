@@ -50,3 +50,6 @@ On the `new-product` page you should be able to **simulate a product creation** 
 
 ## Debug dependencies:
 * **(global)** [Nodemon](https://www.npmjs.com/package/nodemon)
+
+## Database setup:
+On `/utils/database.js` you can find all the database configuration. By default I'm using a MySQL Schema called "**express-practice**".
