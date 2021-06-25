@@ -94,8 +94,10 @@ sequelize.sync({
     }
     return Promise.resolve(user);
     
-// ---------------------------------------------------
 }).then(user => {
+    user.createCart();
+// ---------------------------------------------------
+}).then(cart => {
     // console.log(user);
     app.listen(port);
     console.log(`Listening on port ${port}`);

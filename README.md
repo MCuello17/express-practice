@@ -1,4 +1,4 @@
-# Express exercise (v5.4.0)
+# Express exercise (v5.4.1)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -42,6 +42,7 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(5.3.0)** Added User model.
 * **(5.3.1)** Product deletion and edition based on User.
 * **(5.4.0)** Added cart model.
+* **(5.4.1)** Add and delete products in cart.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
