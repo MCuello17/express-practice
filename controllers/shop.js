@@ -26,6 +26,7 @@ exports.postCart = (req, res, next) => {
         .getCart()
         .then(cart => {
             fetchedCart = cart;
+            totalPrice = cart.totalPrice;
             return cart.getProducts({ where: { id: productId } })
         })
         .then(([product]) => {
@@ -38,7 +39,8 @@ exports.postCart = (req, res, next) => {
         .then (product => {
             return fetchedCart.addProduct(product, {
                 through: {
-                    quantity: newQuantity
+                    quantity: newQuantity,
+                    totalPrice: (product.price * newQuantity)
                 }
             });
         })
@@ -46,12 +48,6 @@ exports.postCart = (req, res, next) => {
             res.redirect('/cart');
         })
         .catch(err => console.log(err))
-
-    Product.findByPk(productId, product => {
-        if (!product) res.redirect('/');
-        Cart.addProduct(productId, product.price);
-    });
-    res.redirect('/cart');
 };
 
 exports.postCartDelete = (req, res, next) => {

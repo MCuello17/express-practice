@@ -26,7 +26,7 @@
                                 (<%= product.cartItem.quantity %>)
                             </p>
                             <p class="item-price">
-                                <%= product.currency + product.price %> 
+                                <%= product.currency + product.cartItem.totalPrice %> 
                             </p>
                             <form action="/cart/delete" method="post">
                                 <input type="hidden" name="productId" value="<%= product.id %>">
