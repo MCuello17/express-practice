@@ -8,33 +8,47 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
     const {title, imageUrl, description, currency, price, stock} = req.body;
-    const product = new Product(title, imageUrl, description, currency, price, stock);
-    product.save().then(() => {
-        res.redirect('/');
-    }).catch(err => console.log(err));
+    Product.create({
+        title: title,
+        price: price,
+        currency: currency,
+        imageUrl: imageUrl,
+        description: description,
+        stock: stock,
+    })
+    .then(result => {
+        console.log(result);
+        res.redirect('/')
+    })
+    .catch(err => console.log(err));
 }
 
 exports.getProducts = (req, res, next) => {
-    const products = Product.fetchAll().then(([rows, fieldData]) => {
+    Product.findAll()
+    .then(products => {
         res.render('shop/product-list', {
-            products: rows,
+            products: products,
             pageID: 'shop',
         });
-    }).catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
 }
 
 exports.getProduct = (req, res, next) => {
     const productId = req.params.productId;
-    Product.findById(productId).then(([rows, fieldData]) => {
-        if (rows.length <= 0) {
+    // Product.findAll({where: {id: productId}}) => array of product/s
+    Product.findByPk(productId)
+    .then(product => {
+        if (!product) {
             return res.status(404).render('error/404', {
                 pageTitle: '404 - My Shop!',
             });
         }
-        const product = rows[0];
+        console.log(product);
         res.render('shop/product-details', {
             pageTitle: product.title,
             product: product,
         });
-    }).catch(err => console.log(err));
+    })
+    .catch(err => {console.log(err)});
 };

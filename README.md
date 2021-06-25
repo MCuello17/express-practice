@@ -1,4 +1,4 @@
-# Express exercise (v5.0.0)
+# Express exercise (v5.2.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -35,9 +35,12 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(4.3.1)** Added cart list and styling.
 * **(4.3.2)** Added cart "delete" product functionality.
 * **(5.0.0)** Added [mysql2](https://www.npmjs.com/package/mysql2) dependency for database functionality.
+* **(5.1.0)** Added [sequelize](https://www.npmjs.com/package/sequelize) dependency ([docs](https://sequelize.org/master/)).
+* **(5.2.0)** Retrieving products with Sequelize.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
+* [sequelize](https://www.npmjs.com/package/sequelize) 
 * [mysql2](https://www.npmjs.com/package/mysql2)
 * [ejs](https://www.npmjs.com/package/ejs)
 ## Dev Dependencies:

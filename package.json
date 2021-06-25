@@ -1,12 +1,13 @@
 {
   "name": "express-practice",
-  "version": "5.0.0",
+  "version": "5.2.0",
   "description": "Express practice excersise!",
   "main": "app.js",
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

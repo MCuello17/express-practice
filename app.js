@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const errorController = require('./controllers/errors')
+const sequelize = require('./utils/database');
 
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
@@ -47,5 +48,10 @@ app.use(errorController.get404);
 // ---------------------------------------------------
 
 const port = 3000;
-app.listen(port);
-console.log(`Listening on port ${port}`);
+
+// Enable auto-creation of tables for models
+sequelize.sync().then(result => {
+    // console.log(result);
+    app.listen(port);
+    console.log(`Listening on port ${port}`);
+}).catch(err => console.log(err));

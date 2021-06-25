@@ -307,6 +307,15 @@ button.button:hover {
 }
 /* --- [/CART] --- */
 
+/* --- [PRODUCT] --- */
+#product img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 20rem;
+}
+/* --- [/PRODUCT] --- */
+
 /* --- [404] --- */
 #error > h1 {
     font-size: 10rem;
