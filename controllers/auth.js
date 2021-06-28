@@ -1,4 +1,7 @@
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
+const { Op } = require('sequelize');
+
 const User = require('../models/user');
 const transpoerter = require('../utils/mailer')
 
@@ -89,4 +92,100 @@ exports.postLogout = (req, res, next) => {
         console.log(err);
         res.redirect('/');
     });
+}
+
+exports.getResetPassword = (req, res, next) => {
+    res.render('auth/password-reset', {
+        pageTitle: 'Reset password - My Shop!',
+        pageID: 'auth',
+        errorMessage: req.flash('error')[0],
+    });
+}
+
+exports.postResetPassword = (req, res, next) => {
+    crypto.randomBytes(32, (err, buffer) => {
+        if (err) {
+            console.log(err);
+            return res.redirect('/reset-password');
+        }
+        const token = buffer.toString('hex');
+        User.findAll({where: { email: req.body.email }})
+            .then(([user]) => {
+                if (!user) {
+                    return redirect('/reset-password')
+                }
+                user.resetToken = token;
+                user.resetTokenExpiration = Date.now() + 3600000; // NOW + 1 hour
+                return user.save();
+            })
+            .then(result => {
+                res.redirect('/');
+                return transpoerter.sendMail({
+                    to: req.body.email,
+                    from: 'myshop@express.com',
+                    subject: 'Password reset',
+                    html: `
+                        <p>You requested a password reset</p>
+                        <p>Click <a href="http://localhost:3000/reset-password/${ token }">this link</a> to set a new password</p>`
+                })
+            })
+            .catch(err => console.log(err));
+    })
+}
+
+exports.getNewPassword = (req, res, next) => {
+    const token = req.params.token;
+
+    User.findAll({ where: {
+        resetToken: token,
+        resetTokenExpiration: {[Op.gt]: Date.now()}
+    }})
+    .then(([user]) => {
+        if (!user) {
+            req.flash('error', 'Invalid token');
+            return req.session.save((err) => {
+                console.log(err);
+                return res.redirect('/reset-password');
+            });
+        }
+        res.render('auth/new-password', {
+            pageTitle: 'Reset password - My Shop!',
+            pageID: 'auth',
+            errorMessage: req.flash('error')[0],
+            userId: user.id,
+            token: token,
+        });
+    })
+    .catch(err => console.log(err));
+}
+
+exports.postNewPassword = (req, res, next) => {
+    const {password: newPassword, token, userId} = req.body;
+    let fetchedUser;
+    User.findAll({ where: {
+        id: userId,
+        resetToken: token,
+        resetTokenExpiration: {[Op.gt]: Date.now()},
+    }})
+    .then(([user]) => {
+        if (!user) {
+            req.flash('error', 'Invalid token');
+            return req.session.save((err) => {
+                console.log(err);
+                return res.redirect('/reset-password');
+            });
+        }
+        fetchedUser = user;
+        return bcrypt.hash(newPassword, 12);
+    })
+    .then(hashedPassword => {
+        fetchedUser.password = hashedPassword;
+        fetchedUser.resetToken = null;
+        fetchedUser.resetTokenExpiration = null;
+        return fetchedUser.save();
+    })
+    .then(result => {
+        res.redirect('/login');
+    })
+    .catch(err => console.log(err));
 }
