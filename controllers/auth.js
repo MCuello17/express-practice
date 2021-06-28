@@ -5,7 +5,6 @@ exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
         pageTitle: 'Login - My Shop!',
         pageID: 'auth',
-        isAuthenticated: req.session.isAuthenticated,
     });
 };
 
@@ -33,7 +32,6 @@ exports.getSignup = (req, res, next) => {
     res.render('auth/signup', {
         pageTitle: 'Signup - My Shop!',
         pageID: 'auth',
-        isAuthenticated: req.session.isAuthenticated,
     });
 };
 

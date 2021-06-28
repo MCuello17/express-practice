@@ -46,6 +46,9 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(6.1.0)** Added [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) dependency (for storing session on the db: [docs](https://github.com/expressjs/session)) and user cookie logic.
 * **(7.0.0)** Authentication functionality (user signup and login).
 * **(7.0.1)** Added [bcryptjs](https://www.npmjs.com/package/bcryptjs) dependency for password encription.
+* **(7.1.0 )** Authentication middleware.
+* **(7.2.0)** Added [csurf](https://www.npmjs.com/package/csurf) dependency for CSRF protection.
+* **(7.2.1)** Implemented locals.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)

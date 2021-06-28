@@ -11,6 +11,7 @@
                     action="/admin/new-product"
                 <% } %>
                 method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="form-control">
                     <label for="product-title">Title</label>
                     <input

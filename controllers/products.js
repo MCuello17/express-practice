@@ -28,7 +28,6 @@ exports.getProducts = (req, res, next) => {
         res.render('shop/product-list', {
             products: products,
             pageID: 'shop',
-            isAuthenticated: req.session.isAuthenticated,
         });
     })
     .catch(err => console.log(err));
@@ -47,7 +46,6 @@ exports.getProduct = (req, res, next) => {
         res.render('shop/product-details', {
             pageTitle: product.title,
             product: product,
-            isAuthenticated: req.session.isAuthenticated,
         });
     })
     .catch(err => {console.log(err)});

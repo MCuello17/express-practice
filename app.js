@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const csrf = require('csurf');
 
 const sequelize = require('./utils/database');
 const errorController = require('./controllers/errors');
@@ -49,7 +50,11 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: store,
-}))
+}));
+
+// CSRF protection
+const csrfProtection = csrf();
+app.use(csrfProtection);
 
 // User Middleware
 app.use((req, res, next) => {
@@ -62,6 +67,13 @@ app.use((req, res, next) => {
                 return next();
             }).catch(err => console.log(err));
 });
+
+// Local variables. This variables are accesible from any view and part of the program
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.session.isAuthenticated;
+    res.locals.csrfToken = req.csrfToken();
+    next();
+})
 
 app.use(shopRoutes);
 app.use(authRoutes);
