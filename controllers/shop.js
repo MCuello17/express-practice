@@ -1,3 +1,4 @@
+const Cart = require("../models/cart");
 const Product = require("../models/product");
 
 exports.getCart = (req, res, next) => {
@@ -24,8 +25,8 @@ exports.postCart = (req, res, next) => {
     req.user
         .getCart()
         .then(cart => {
+            console.log({cart});
             fetchedCart = cart;
-            totalPrice = cart.totalPrice;
             return cart.getProducts({ where: { id: productId } })
         })
         .then(([product]) => {

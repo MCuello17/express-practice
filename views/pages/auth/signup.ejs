@@ -2,13 +2,13 @@
 <body>
     <%- include('../../partials/layout/navbar.ejs') %>
     <main>
-        <section id="login">
+        <section id="signup">
             <% if (errorMessage) { %>
                 <div class="flash-message error">
                     <%= errorMessage %>
                 </div>
             <% } %> 
-            <form action="/login" method="post">
+            <form action="/signup" method="post">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="form-control">
                     <label for="email">Email</label>
@@ -18,7 +18,11 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password">
                 </div>
-                <button class="button" type="submit">Login</button>
+                <div class="form-control">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="confirmPassword" name="confirmPassword" id="confirmPassword">
+                </div>
+                <button class="button" type="submit">Signup</button>
             </form>
         </section>
     </main>

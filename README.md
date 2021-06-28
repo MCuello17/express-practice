@@ -1,15 +1,13 @@
-# Express exercise (v6.1.0)
+# Express exercise (v7.2.3)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
 
     npm start
 
-Now head into http://localhost:3000 from a browser. You will see a list of products and a link to **create a new product**.\
-On the `new-product` page you should be able to **simulate a product creation** just by submitting on the form. This should redirect you back to the product list page and **on your terminal** you will have your input information!
-
-**Example output:**
-> `{ product: 'Wireless Mouse' }`
+Now head into http://localhost:3000 from a browser. You will see an empty list of products. You should be able to **signup** from the navbar. Once you do, **log in** and you will se an option to **Create a new product** on the homepage of the app\
+On the `new-product` page you should be able to **Create a product** just by submitting on the form. This should redirect you back to the product list page with your new product in it!\
+You can also **Add products to your cart**, **order**, and **delete them**.
 
 ## Versions:
 * **(1.0.0)** Created the project.
@@ -44,6 +42,13 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(5.5.0)** Added order model and functionality.
 * **(6.0.0)** Added [express-session](https://www.npmjs.com/package/express-session) dependency.
 * **(6.1.0)** Added [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) dependency (for storing session on the db: [docs](https://github.com/expressjs/session)) and user cookie logic.
+* **(7.0.0)** Authentication functionality (user signup and login).
+* **(7.0.1)** Added [bcryptjs](https://www.npmjs.com/package/bcryptjs) dependency for password encription.
+* **(7.1.0 )** Authentication middleware.
+* **(7.2.0)** Added [csurf](https://www.npmjs.com/package/csurf) dependency for CSRF protection.
+* **(7.2.1)** Implemented locals.
+* **(7.2.2)** Fixed user creation.
+* **(7.2.3)** Added [connect-flash](https://www.npmjs.com/package/connect-flash) dependency for storing flash messages in session.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
@@ -52,6 +57,9 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * [express-session](https://www.npmjs.com/package/express-session)
 * [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize)
 * [ejs](https://www.npmjs.com/package/ejs)
+* [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+* [csurf](https://www.npmjs.com/package/csurf)
+* [connect-flash](https://www.npmjs.com/package/connect-flash)
 ## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 

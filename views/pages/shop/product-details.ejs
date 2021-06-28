@@ -10,6 +10,7 @@
             <div class="product-actions">
                 <% if (isAuthenticated) { %> 
                     <form action="/cart" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button class="button" type="submit">Add to cart</button>
                         <input type="hidden" name="productId" value="<%= product.id %>">
                     </form>
@@ -17,6 +18,7 @@
                         Edit
                     </a>
                     <form action="/admin/delete-product" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button class="button" type="submit">Delete</button>
                         <input type="hidden" name="productId" value="<%= product.id %>">
                     </form>
