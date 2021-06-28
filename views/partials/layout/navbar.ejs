@@ -9,6 +9,10 @@
                 class="nav-item <%= (typeof pageID !== 'undefined' && pageID === 'cart') ? 'active' : '' %>">
                 <a href="/cart">Cart</a>
             </li>
+            <li
+                class="nav-item login <%= (typeof pageID !== 'undefined' && pageID === 'login') ? 'active' : '' %>">
+                <a href="/login">Login</a>    
+            </li>
         </ul>
     </nav>
 </header>

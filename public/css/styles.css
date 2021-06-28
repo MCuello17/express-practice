@@ -38,6 +38,62 @@ section {
     color: #000;
     border-color: #e8e8e8;
 }
+
+.form-control {
+    margin: 1rem 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-control > label {
+    font-weight: 600;
+    padding: .5rem 0;
+}
+
+.form-control > input,
+.form-control > textarea,
+.form-control select {
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid #e8e8e8;
+    overflow: hidden;
+    outline: 0;
+    width: 100%;
+}
+
+.form-control select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.form-control .custom-select {
+    position: relative;
+}
+
+.form-control .custom-select::after {
+    content: "";
+    position: absolute;
+    top: 30%;
+    right: 1rem;
+    width: .5rem;
+    height: .5rem;
+    border-bottom: 1px solid #000;
+    border-right: 1px solid #000;
+    transform: rotate(45deg);
+}
+
+.form-control > textarea {
+    resize: vertical;
+}
+
+.form-control > input:focus,
+.form-control > textarea:focus,
+.form-control > select:focus {
+    border: 1px solid #000;
+    box-shadow: 0px 0 5px 0px #e8e8e8;
+}
 /* --- [/GENERAL] --- */
 
 /* --- [NAVIGATION] --- */
@@ -58,6 +114,10 @@ section {
 #navbar .nav-item {
     margin: 0 .5rem;
     display: flex;
+}
+
+#navbar .nav-item.login {
+    margin-left: auto;
 }
 
 #navbar .nav-item > a {
@@ -197,62 +257,6 @@ section {
 #new-product > form {
     width: 100%;
     margin: 0 auto;
-}
-
-#new-product .form-control {
-    margin: 1rem 2rem 2.5rem;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-#new-product .form-control > label {
-    font-weight: 600;
-    padding: .5rem 0;
-}
-
-#new-product .form-control > input,
-#new-product .form-control > textarea,
-#new-product .form-control select {
-    padding: .5rem 1rem;
-    border-radius: 1rem;
-    border: 1px solid #e8e8e8;
-    overflow: hidden;
-    outline: 0;
-    width: 100%;
-}
-
-#new-product .form-control select {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-#new-product .form-control .custom-select {
-    position: relative;
-}
-
-#new-product .form-control .custom-select::after {
-    content: "";
-    position: absolute;
-    top: 30%;
-    right: 1rem;
-    width: .5rem;
-    height: .5rem;
-    border-bottom: 1px solid #000;
-    border-right: 1px solid #000;
-    transform: rotate(45deg);
-}
-
-#new-product .form-control > textarea {
-    resize: vertical;
-}
-
-#new-product .form-control > input:focus,
-#new-product .form-control > textarea:focus,
-#new-product .form-control > select:focus {
-    border: 1px solid #000;
-    box-shadow: 0px 0 5px 0px #e8e8e8;
 }
 
     /* Small devices (landscape phones, 576px and up) */

@@ -7,7 +7,7 @@ const password = 'root';
 // Sequelize config
 const sequelize = new Sequelize(database, username, password, {
     dialect: 'mysql',
-    host: 'localhost'
+    host: 'localhost',
 });
 
 module.exports = sequelize;

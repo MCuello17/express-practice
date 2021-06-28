@@ -1,9 +1,13 @@
 const express = require('express');
-const path = require('path');
 
 const productsController = require('../controllers/products');
 
 const router = express.Router();
+
+router.use('/', (req, res, next) => {
+    if (!req.session.isLoggedIn) return res.redirect('/');
+    next();
+});
 
 // (GET)/admin/new-product => New product form
 router.get('/new-product', productsController.getAddProduct);

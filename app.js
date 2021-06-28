@@ -1,14 +1,16 @@
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const errorController = require('./controllers/errors');
 const sequelize = require('./utils/database');
+const errorController = require('./controllers/errors');
 const Product = require('./models/product');
 const User = require('./models/user');
 const Cart = require('./models/cart');
-
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const authRoutes = require('./routes/auth');
 const CartItem = require('./models/cart-item');
 const Order = require('./models/order');
 const OrderItem = require('./models/order-item');
@@ -35,6 +37,19 @@ app.use(express.urlencoded({extended: true}));
 // Staric files Middleware (public/*)
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Session store
+const store = new SequelizeStore({
+    db: sequelize,
+});
+
+// Session Middleware
+app.use(session({
+    secret: 'super-secret secret',
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+}))
+
 // User Middleware
 app.use((req, res, next) => {
     User.findByPk(1)
@@ -46,6 +61,8 @@ app.use((req, res, next) => {
 });
 
 app.use(shopRoutes);
+app.use(authRoutes);
+
 // Filtered router (all routes in router will start with '/admin')
 app.use('/admin', adminRoutes);
 
