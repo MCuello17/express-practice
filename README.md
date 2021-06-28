@@ -62,6 +62,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 * [csurf](https://www.npmjs.com/package/csurf)
 * [connect-flash](https://www.npmjs.com/package/connect-flash)
+* [nodemailer](https://www.npmjs.com/package/nodemailer)
 ## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 
