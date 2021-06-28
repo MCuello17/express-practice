@@ -105,25 +105,24 @@ sequelize.sync({
 // ---------------------------------------------------
 //   CREATING A USER MANUALLY:
 // ---------------------------------------------------
-}).then(result => {
+// }).then(result => {
 
-    // console.log(result);
-    return User.findByPk(1);
+//     // console.log(result);
+//     return User.findByPk(1);
     
-}).then(user => {
-    if (!user) {
-        return User.create({
-            name: "Michael",
-            email: "michael@test.com"
-        });
-    }
-    return Promise.resolve(user);
+// }).then(user => {
+//     if (!user) {
+//         return User.create({
+//             name: "Michael",
+//             email: "michael@test.com"
+//         });
+//     }
+//     return Promise.resolve(user);
     
-}).then(user => {
-    user.createCart();
+// }).then(user => {
+//     user.createCart();
 // ---------------------------------------------------
-}).then(cart => {
-    // console.log(user);
+}).then(() => {
     app.listen(port);
     console.log(`Listening on port ${port}`);
 })
