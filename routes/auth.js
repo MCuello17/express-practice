@@ -36,7 +36,9 @@ router.post(
                             return Promise.reject("Email already exists");
                         }
                     });
-            }),
+            })
+            // Sanitizers
+            .normalizeEmail(),
         // Another way to validate and setup general errro messages:
         body('password', "Password must be at least 6 chatacters long")
             .isLength({ min: 6 }),
@@ -56,7 +58,8 @@ router.post('/logout', authController.postLogout);
 router.post('/reset-password', [
     check('email')
         .isEmail()
-        .withMessage("Please enter a valid email"),
+        .withMessage("Please enter a valid email")
+        .normalizeEmail(),
 ], authController.postResetPassword);
 
 // (POST)/new-password => User password reset page
