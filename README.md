@@ -1,4 +1,4 @@
-# Express exercise (v7.2.3)
+# Express exercise (v7.3.1)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -49,6 +49,8 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * **(7.2.1)** Implemented locals.
 * **(7.2.2)** Fixed user creation.
 * **(7.2.3)** Added [connect-flash](https://www.npmjs.com/package/connect-flash) dependency for storing flash messages in session.
+* **(7.3.0)** Added [nodemailer](https://www.npmjs.com/package/nodemailer) dependency for email management ([docs](https://nodemailer.com/usage/)).
+* **(7.3.1)** Setup mailtrap and mailing config.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
@@ -60,6 +62,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 * [csurf](https://www.npmjs.com/package/csurf)
 * [connect-flash](https://www.npmjs.com/package/connect-flash)
+* [nodemailer](https://www.npmjs.com/package/nodemailer)
 ## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 

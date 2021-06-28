@@ -1,5 +1,6 @@
-const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const User = require('../models/user');
+const transpoerter = require('../utils/mailer')
 
 exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
@@ -52,8 +53,8 @@ exports.getSignup = (req, res, next) => {
 exports.postSignup = (req, res, next) => {
     const {email, password, confirmPassword} = req.body;
     User.findAll({where: {email: email}})
-        .then(userDoc => {
-            if (userDoc) {
+        .then(([user]) => {
+            if (user) {
                 req.flash('error', 'Email already exists');
                 return req.session.save((err) => {
                     console.log(err);
@@ -72,6 +73,12 @@ exports.postSignup = (req, res, next) => {
             })
             .then(result => {
                 res.redirect('/login')
+                return transpoerter.sendMail({
+                    to: email,
+                    from: 'myshop@express.com',
+                    subject: 'Signed up',
+                    html: '<h1>Signed up!</h1>'
+                });
             });
         })
         .catch(err => console.log(err));
