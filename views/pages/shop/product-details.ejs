@@ -8,20 +8,22 @@
             <hr>
             <p><%= product.description %> </p>
             <div class="product-actions">
-                <% if (isAuthenticated) { %> 
+                <% if (isAuthenticated) { %>
                     <form action="/cart" method="POST">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button class="button" type="submit">Add to cart</button>
                         <input type="hidden" name="productId" value="<%= product.id %>">
                     </form>
-                    <a href="/admin/edit-product/<%= product.id %> " class="button">
-                        Edit
-                    </a>
-                    <form action="/admin/delete-product" method="POST">
-                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <button class="button" type="submit">Delete</button>
-                        <input type="hidden" name="productId" value="<%= product.id %>">
-                    </form>
+                    <% if (isFromUser) { %>
+                        <a href="/admin/edit-product/<%= product.id %> " class="button">
+                            Edit
+                        </a>
+                        <form action="/admin/delete-product" method="POST">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button class="button" type="submit">Delete</button>
+                            <input type="hidden" name="productId" value="<%= product.id %>">
+                        </form>
+                    <% } %>
                 <% } %>
             </div>
         </section>

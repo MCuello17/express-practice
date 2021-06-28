@@ -46,6 +46,7 @@ exports.getProduct = (req, res, next) => {
         res.render('shop/product-details', {
             pageTitle: product.title,
             product: product,
+            isFromUser: (product.userId === req.user.id),
         });
     })
     .catch(err => {console.log(err)});
@@ -70,20 +71,22 @@ exports.getEditProduct = (req, res, next) => {
 
 exports.postEditProduct = (req, res, next) => {
     const {productId, title, imageUrl, description, currency, price, stock} = req.body;
-    Product.findByPk(productId)
-    .then(product => {
-        product.title = title;
-        product.imageUrl = imageUrl;
-        product.description = description;
-        product.currency = currency;
-        product.price = price;
-        product.stock = stock;
-        return product.save();
-    })
-    .then(product => {
-        res.redirect(`/products/${ product.id }`);
-    })
-    .catch(err => console.log(err))
+    req.user
+        .getProducts({where: {id: productId}})
+        .then(([product]) => {
+            if (!product) res.redirect('/');
+            product.title = title;
+            product.imageUrl = imageUrl;
+            product.description = description;
+            product.currency = currency;
+            product.price = price;
+            product.stock = stock;
+            return product.save();
+        })
+        .then(product => {
+            res.redirect(`/products/${ product.id }`);
+        })
+        .catch(err => console.log(err))
 };
 
 exports.postDeleteProduct = (req, res, next) => {
