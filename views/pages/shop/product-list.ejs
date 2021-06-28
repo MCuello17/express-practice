@@ -28,8 +28,10 @@
                 </ul>
             <% } else { %>
                 <h1>There are no products! D:</h1>
-            <% } %> 
-            <a class="button" href="/admin/new-product">Add new</a>
+            <% } %>
+            <% if (isAuthenticated) { %> 
+                <a class="button" href="/admin/new-product">Add new</a>
+            <% } %>
         </section>
     </main>
 </body>

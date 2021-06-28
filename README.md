@@ -1,4 +1,4 @@
-# Express exercise (v5.5.0)
+# Express exercise (v6.1.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -42,11 +42,15 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(5.3.0)** Added User model and functionality.
 * **(5.4.0)** Added cart model and functionality.
 * **(5.5.0)** Added order model and functionality.
+* **(6.0.0)** Added [express-session](https://www.npmjs.com/package/express-session) dependency.
+* **(6.1.0)** Added [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) dependency (for storing session on the db: [docs](https://github.com/expressjs/session)) and user cookie logic.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
-* [sequelize](https://www.npmjs.com/package/sequelize) 
 * [mysql2](https://www.npmjs.com/package/mysql2)
+* [sequelize](https://www.npmjs.com/package/sequelize) 
+* [express-session](https://www.npmjs.com/package/express-session)
+* [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize)
 * [ejs](https://www.npmjs.com/package/ejs)
 ## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
