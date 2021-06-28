@@ -1,4 +1,4 @@
-# Express exercise (v7.4.1)
+# Express exercise (v8.0.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -53,6 +53,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * **(7.3.1)** Setup mailtrap and mailing config.
 * **(7.4.0)** Password resetting.
 * **(7.4.1)** Authorization updates.
+* **(8.0.0)** Added [express-validator](https://www.npmjs.com/package/express-validator) dependency for user input validation ([docs](https://express-validator.github.io/docs/)).
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
@@ -65,6 +66,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * [csurf](https://www.npmjs.com/package/csurf)
 * [connect-flash](https://www.npmjs.com/package/connect-flash)
 * [nodemailer](https://www.npmjs.com/package/nodemailer)
+* [express-validator](https://www.npmjs.com/package/express-validator)
 ## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 

@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const { Op } = require('sequelize');
+const { validationResult } = require('express-validator/check')
 
 const User = require('../models/user');
 const transpoerter = require('../utils/mailer')
@@ -54,34 +55,35 @@ exports.getSignup = (req, res, next) => {
 };
 
 exports.postSignup = (req, res, next) => {
-    const {email, password, confirmPassword} = req.body;
-    User.findAll({where: {email: email}})
-        .then(([user]) => {
-            if (user) {
-                req.flash('error', 'Email already exists');
-                return req.session.save((err) => {
-                    console.log(err);
-                    return res.redirect('/signup');
-                });
-            }
-            return bcrypt.hash(password, 12)
-            .then(hashedPassword => {
-                return User.create({
-                    email: email,
-                    password: hashedPassword,
-                });
-            })
-            .then(user => {
-                return user.createCart();
-            })
-            .then(result => {
-                res.redirect('/login')
-                return transpoerter.sendMail({
-                    to: email,
-                    from: 'myshop@express.com',
-                    subject: 'Signed up',
-                    html: '<h1>Signed up!</h1>'
-                });
+    const { email, password } = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.status(422).render('auth/signup', {
+            pageTitle: 'Signup - My Shop!',
+            pageID: 'auth',
+            errorMessage: errors.array()[0].msg,
+        });
+    }
+
+    bcrypt.hash(password, 12)
+        .then(hashedPassword => {
+            return User.create({
+                email: email,
+                password: hashedPassword,
+            });
+        })
+        .then(user => {
+            return user.createCart();
+        })
+        .then(result => {
+            res.redirect('/login')
+            return transpoerter.sendMail({
+                to: email,
+                from: 'myshop@express.com',
+                subject: 'Signed up',
+                html: '<h1>Signed up!</h1>'
             });
         })
         .catch(err => console.log(err));
