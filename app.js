@@ -14,6 +14,7 @@ const authRoutes = require('./routes/auth');
 const CartItem = require('./models/cart-item');
 const Order = require('./models/order');
 const OrderItem = require('./models/order-item');
+const isAuth = require('./middleware/is-auth');
 
 const app = express();
 
@@ -66,7 +67,7 @@ app.use(shopRoutes);
 app.use(authRoutes);
 
 // Filtered router (all routes in router will start with '/admin')
-app.use('/admin', adminRoutes);
+app.use('/admin', isAuth, adminRoutes);
 
 // 404 page Middleware 
 app.use(errorController.get404);

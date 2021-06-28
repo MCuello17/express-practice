@@ -5,7 +5,7 @@ exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
         pageTitle: 'Login - My Shop!',
         pageID: 'auth',
-        isAuthenticated: req.session.isLoggedIn,
+        isAuthenticated: req.session.isAuthenticated,
     });
 };
 
@@ -17,7 +17,7 @@ exports.postLogin = (req, res, next) => {
             bcrypt.compare(password, user.password)
                 .then(doMatch => {
                     if (!doMatch) return res.redirect('/login');
-                    req.session.isLoggedIn = true;
+                    req.session.isAuthenticated = true;
                     req.session.user = user;
                     return req.session.save((err) => {
                         console.log(err);
@@ -33,7 +33,7 @@ exports.getSignup = (req, res, next) => {
     res.render('auth/signup', {
         pageTitle: 'Signup - My Shop!',
         pageID: 'auth',
-        isAuthenticated: req.session.isLoggedIn,
+        isAuthenticated: req.session.isAuthenticated,
     });
 };
 
