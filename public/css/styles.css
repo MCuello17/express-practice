@@ -46,6 +46,10 @@ section {
     text-align: left;
 }
 
+.form-control.link {
+    text-align: center;
+}
+
 .form-control > label {
     font-weight: 600;
     padding: .5rem 0;

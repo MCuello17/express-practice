@@ -1,4 +1,4 @@
-# Express exercise (v7.3.1)
+# Express exercise (v7.4.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -51,6 +51,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * **(7.2.3)** Added [connect-flash](https://www.npmjs.com/package/connect-flash) dependency for storing flash messages in session.
 * **(7.3.0)** Added [nodemailer](https://www.npmjs.com/package/nodemailer) dependency for email management ([docs](https://nodemailer.com/usage/)).
 * **(7.3.1)** Setup mailtrap and mailing config.
+* **(7.4.0)** Password resetting.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
