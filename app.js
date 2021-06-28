@@ -3,6 +3,7 @@ const path = require('path');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const csrf = require('csurf');
+const flash = require('connect-flash');
 
 const sequelize = require('./utils/database');
 const errorController = require('./controllers/errors');
@@ -51,6 +52,9 @@ app.use(session({
     saveUninitialized: false,
     store: store,
 }));
+
+// connect-flash middleware for flash messages
+app.use(flash());
 
 // CSRF protection
 const csrfProtection = csrf();

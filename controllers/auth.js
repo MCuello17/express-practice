@@ -5,17 +5,30 @@ exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
         pageTitle: 'Login - My Shop!',
         pageID: 'auth',
+        errorMessage: req.flash('error')[0],
     });
 };
 
 exports.postLogin = (req, res, next) => {
     const {email, password} = req.body;
-    User.findOne({ email: email })
-        .then(user => {
-            if (!user) return res.redirect('/login');
+    User.findAll({where: {email: email}})
+        .then(([user]) => {
+            if (!user) {
+                req.flash('error', 'Invalid email or password');
+                return req.session.save((err) => {
+                    console.log(err);
+                    return res.redirect('/login');
+                });
+            }
             bcrypt.compare(password, user.password)
                 .then(doMatch => {
-                    if (!doMatch) return res.redirect('/login');
+                    if (!doMatch) {
+                        req.flash('error', 'Invalid email or password');
+                        return req.session.save((err) => {
+                            console.log(err);
+                            return res.redirect('/login');
+                        });
+                    }
                     req.session.isAuthenticated = true;
                     req.session.user = user;
                     return req.session.save((err) => {
@@ -32,14 +45,21 @@ exports.getSignup = (req, res, next) => {
     res.render('auth/signup', {
         pageTitle: 'Signup - My Shop!',
         pageID: 'auth',
+        errorMessage: req.flash('error')[0],
     });
 };
 
 exports.postSignup = (req, res, next) => {
     const {email, password, confirmPassword} = req.body;
-    User.findOne({ email: email })
+    User.findAll({where: {email: email}})
         .then(userDoc => {
-            if (userDoc) return res.redirect('/signup');
+            if (userDoc) {
+                req.flash('error', 'Email already exists');
+                return req.session.save((err) => {
+                    console.log(err);
+                    return res.redirect('/signup');
+                });
+            }
             return bcrypt.hash(password, 12)
             .then(hashedPassword => {
                 return User.create({

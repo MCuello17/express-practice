@@ -1,4 +1,4 @@
-# Express exercise (v7.2.2)
+# Express exercise (v7.2.3)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -50,6 +50,7 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * **(7.2.0)** Added [csurf](https://www.npmjs.com/package/csurf) dependency for CSRF protection.
 * **(7.2.1)** Implemented locals.
 * **(7.2.2)** Fixed user creation.
+* **(7.2.3)** Added [connect-flash](https://www.npmjs.com/package/connect-flash) dependency for storing flash messages in session.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)

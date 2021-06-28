@@ -1,10 +1,11 @@
 {
   "name": "express-practice",
-  "version": "6.1.0",
+  "version": "7.2.3",
   "description": "Express practice excersise!",
   "main": "app.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "connect-session-sequelize": "^7.1.1",
     "csurf": "^1.11.0",
     "ejs": "^3.1.6",
