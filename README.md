@@ -5,11 +5,9 @@ To run the server simply write the following in your terminal:
 
     npm start
 
-Now head into http://localhost:3000 from a browser. You will see a list of products and a link to **create a new product**.\
-On the `new-product` page you should be able to **simulate a product creation** just by submitting on the form. This should redirect you back to the product list page and **on your terminal** you will have your input information!
-
-**Example output:**
-> `{ product: 'Wireless Mouse' }`
+Now head into http://localhost:3000 from a browser. You will see an empty list of products. You should be able to **signup** from the navbar. Once you do, **log in** and you will se an option to **Create a new product** on the homepage of the app\
+On the `new-product` page you should be able to **Create a product** just by submitting on the form. This should redirect you back to the product list page with your new product in it!\
+You can also **Add products to your cart**, **order**, and **delete them**.
 
 ## Versions:
 * **(1.0.0)** Created the project.
