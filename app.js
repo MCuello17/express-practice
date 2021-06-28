@@ -52,12 +52,14 @@ app.use(session({
 
 // User Middleware
 app.use((req, res, next) => {
-    User.findByPk(1)
-    .then(user => {
-        // Global user in the request
-        req.user = user;
-        next();
-    }).catch(err => console.log(err));
+    if (!req.session.user) return next();
+    console.log(req.session.user.id);
+        User.findByPk(req.session.user.id)
+            .then(user => {
+                // Global user in the request
+                req.user = user;
+                return next();
+            }).catch(err => console.log(err));
 });
 
 app.use(shopRoutes);

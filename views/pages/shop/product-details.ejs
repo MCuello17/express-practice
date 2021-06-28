@@ -8,11 +8,11 @@
             <hr>
             <p><%= product.description %> </p>
             <div class="product-actions">
-                <form action="/cart" method="POST">
-                    <button class="button" type="submit">Add to cart</button>
-                    <input type="hidden" name="productId" value="<%= product.id %>">
-                </form>
                 <% if (isAuthenticated) { %> 
+                    <form action="/cart" method="POST">
+                        <button class="button" type="submit">Add to cart</button>
+                        <input type="hidden" name="productId" value="<%= product.id %>">
+                    </form>
                     <a href="/admin/edit-product/<%= product.id %> " class="button">
                         Edit
                     </a>
