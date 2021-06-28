@@ -10,13 +10,7 @@ const User = require('../models/user');
 router.get('/login', authController.getLogin);
 
 // (POST)/login => Login the user
-router.post('/login', [
-    check('email')
-        .isEmail()
-        .withMessage("Please enter a valid email"),
-    check('password', "Password must be at least 6 chatacters long")
-        .isLength({ min: 6 }),
-], authController.postLogin);
+router.post('/login', authController.postLogin);
 
 // (GET)/signup => User signup page
 router.get('/signup', authController.getSignup);
@@ -69,6 +63,11 @@ router.post('/reset-password', [
 router.post('/new-password', [
     check('password', "Password must be at least 6 chatacters long")
         .isLength({ min: 6 }),
+    check('confirmPassword')
+        .custom((value, {req}) => {
+            if (value !== req.body.password) throw new Error('Passwords must be identical');
+            return true;
+        })
 ], authController.postNewPassword);
 
 module.exports = router;

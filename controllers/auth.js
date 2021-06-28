@@ -16,22 +16,47 @@ exports.getLogin = (req, res, next) => {
 
 exports.postLogin = (req, res, next) => {
     const {email, password} = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.status(422).render('auth/login', {
+            pageTitle: 'Login - My Shop!',
+            pageID: 'auth',
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array(),
+            oldInput: { email: email, password: password },
+        });
+    }
+
     User.findAll({where: {email: email}})
         .then(([user]) => {
             if (!user) {
                 req.flash('error', 'Invalid email or password');
                 return req.session.save((err) => {
                     console.log(err);
-                    return res.redirect('/login');
+                    return res.status(422).render('auth/login', {
+                        pageTitle: 'Login - My Shop!',
+                        pageID: 'auth',
+                        errorMessage: "Invalid email or password",
+                        validationErrors: [{param: 'email'}, {param: 'password'}],
+                        oldInput: { email: email, password: password },
+                    });
                 });
             }
             bcrypt.compare(password, user.password)
                 .then(doMatch => {
                     if (!doMatch) {
-                        req.flash('error', 'Invalid email or password');
                         return req.session.save((err) => {
                             console.log(err);
-                            return res.redirect('/login');
+                            return res.status(422).render('auth/login', {
+                                pageTitle: 'Login - My Shop!',
+                                pageID: 'auth',
+                                errorMessage: "Invalid email or password",
+                                validationErrors: [{param: 'email'}, {param: 'password'}],
+                                oldInput: { email: email, password: password },
+                            });
                         });
                     }
                     req.session.isAuthenticated = true;
@@ -55,7 +80,7 @@ exports.getSignup = (req, res, next) => {
 };
 
 exports.postSignup = (req, res, next) => {
-    const { email, password } = req.body;
+    const { email, password, confirmPassword } = req.body;
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -64,6 +89,8 @@ exports.postSignup = (req, res, next) => {
             pageTitle: 'Signup - My Shop!',
             pageID: 'auth',
             errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array(),
+            oldInput: { email: email, password: password, confirmPassword: confirmPassword },
         });
     }
 
@@ -162,7 +189,22 @@ exports.getNewPassword = (req, res, next) => {
 }
 
 exports.postNewPassword = (req, res, next) => {
-    const {password: newPassword, token, userId} = req.body;
+    const {password: newPassword, token, userId, confirmPassword} = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.status(422).render('auth/new-password', {
+            pageTitle: 'Reset password - My Shop!',
+            pageID: 'auth',
+            userId: userId,
+            token: token,
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array(),
+            oldInput: { password: newPassword, confirmPassword: confirmPassword }
+        });
+    }
+
     let fetchedUser;
     User.findAll({ where: {
         id: userId,

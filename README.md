@@ -1,4 +1,4 @@
-# Express exercise (v8.0.0)
+# Express exercise (v8.0.1)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -54,6 +54,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * **(7.4.0)** Password resetting.
 * **(7.4.1)** Authorization updates.
 * **(8.0.0)** Added [express-validator](https://www.npmjs.com/package/express-validator) dependency for user input validation ([docs](https://express-validator.github.io/docs/)).
+* **(8.0.1)** Improved user experience with validation.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
