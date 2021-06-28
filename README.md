@@ -59,6 +59,9 @@ On the `new-product` page you should be able to **simulate a product creation** 
 * [express-session](https://www.npmjs.com/package/express-session)
 * [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize)
 * [ejs](https://www.npmjs.com/package/ejs)
+* [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+* [csurf](https://www.npmjs.com/package/csurf)
+* [connect-flash](https://www.npmjs.com/package/connect-flash)
 ## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 
