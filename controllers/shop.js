@@ -18,6 +18,7 @@ exports.getCart = (req, res, next) => {
         .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     });
 };
@@ -54,6 +55,7 @@ exports.postCart = (req, res, next) => {
         .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     })
 };
@@ -74,6 +76,7 @@ exports.postCartDelete = (req, res, next) => {
         .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     })
 };
@@ -113,6 +116,7 @@ exports.postCheckout = (req, res, next) => {
         .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     })
 };

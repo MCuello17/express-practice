@@ -56,6 +56,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * **(8.0.0)** Added [express-validator](https://www.npmjs.com/package/express-validator) dependency for user input validation ([docs](https://express-validator.github.io/docs/)).
 * **(8.0.1)** Improved user experience with validation.
 * **(8.1.0)** Improved error handling.
+* **(8.2.0)** Added [multer](https://www.npmjs.com/package/multer) dependency for file uploading.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
@@ -69,6 +70,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * [connect-flash](https://www.npmjs.com/package/connect-flash)
 * [nodemailer](https://www.npmjs.com/package/nodemailer)
 * [express-validator](https://www.npmjs.com/package/express-validator)
+* [multer](https://www.npmjs.com/package/multer)
 ## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 

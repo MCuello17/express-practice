@@ -62,6 +62,7 @@ exports.postLogin = (req, res, next) => {
                         {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     };
                         res.redirect('/');
@@ -70,12 +71,14 @@ exports.postLogin = (req, res, next) => {
                 .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     })
         })
         .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     });
 }
@@ -124,6 +127,7 @@ exports.postSignup = (req, res, next) => {
         .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     });
 }
@@ -133,6 +137,7 @@ exports.postLogout = (req, res, next) => {
         {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     };
         res.redirect('/');
@@ -153,6 +158,7 @@ exports.postResetPassword = (req, res, next) => {
             {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     };
             return res.redirect('/reset-password');
@@ -181,6 +187,7 @@ exports.postResetPassword = (req, res, next) => {
             .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     });
     })
@@ -200,6 +207,7 @@ exports.getNewPassword = (req, res, next) => {
                 {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     };
                 return res.redirect('/reset-password');
@@ -216,6 +224,7 @@ exports.getNewPassword = (req, res, next) => {
     .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     });
 }
@@ -250,6 +259,7 @@ exports.postNewPassword = (req, res, next) => {
                 {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     };
                 return res.redirect('/reset-password');
@@ -270,6 +280,7 @@ exports.postNewPassword = (req, res, next) => {
     .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     });
 }

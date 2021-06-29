@@ -15,7 +15,8 @@
                 <% } else { %>
                     action="/admin/new-product"
                 <% } %>
-                method="post">
+                method="post"
+                enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="form-control">
                     <label for="product-title">Title</label>
@@ -33,7 +34,7 @@
                         name="title"
                         placeholder="Laptop bag"/>
                 </div>
-                <div class="form-control">
+                <!-- <div class="form-control">
                     <label for="product-image">Image URL</label>
                     <input
                         id="product-image"
@@ -48,6 +49,13 @@
                         type="text"
                         name="imageUrl"
                         placeholder="https://image.freepik.com/free-vector/vector-set-laptop-laptop-bag_60352-1108.jpg"/>
+                </div> -->
+                <div class="form-control">
+                    <label for="product-image">Image</label>
+                    <input
+                        id="product-image"
+                        type="file"
+                        name="image"/>
                 </div>
                 <div class="form-control">
                     <label for="product-currency">Currency</label>

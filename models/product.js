@@ -23,7 +23,7 @@ const Product = sequelize.define('product', {
         allowNull: false,
         defaultValue: '$',
     },
-    imageUrl: {
+    image: {
         type: Sequelize.STRING,
         allowNull: false,
     },

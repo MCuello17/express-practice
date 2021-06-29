@@ -40,8 +40,8 @@ router.post(
             // Sanitizers
             .normalizeEmail(),
         // Another way to validate and setup general errro messages:
-        body('password', "Password must be at least 6 chatacters long")
-            .isLength({ min: 6 }),
+        body('password', "Password must be at least 4 chatacters long")
+            .isLength({ min: 4 }),
         body('confirmPassword')
             .custom((value, {req}) => {
                 if (value !== req.body.password) throw new Error('Passwords must be identical');
@@ -64,8 +64,8 @@ router.post('/reset-password', [
 
 // (POST)/new-password => User password reset page
 router.post('/new-password', [
-    check('password', "Password must be at least 6 chatacters long")
-        .isLength({ min: 6 }),
+    check('password', "Password must be at least 4 chatacters long")
+        .isLength({ min: 4 }),
     check('confirmPassword')
         .custom((value, {req}) => {
             if (value !== req.body.password) throw new Error('Passwords must be identical');
