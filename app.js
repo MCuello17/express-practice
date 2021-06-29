@@ -63,13 +63,15 @@ app.use(csrfProtection);
 // User Middleware
 app.use((req, res, next) => {
     if (!req.session.user) return next();
-    console.log(req.session.user.id);
-        User.findByPk(req.session.user.id)
-            .then(user => {
-                // Global user in the request
-                req.user = user;
-                return next();
-            }).catch(err => console.log(err));
+    User.findByPk(req.session.user.id)
+        .then(user => {
+            if (!user) return next();
+            // Global user in the request
+            req.user = user;
+            return next();
+        }).catch(err => {
+            throw new Error(err);
+        });
 });
 
 // Local variables. This variables are accesible from any view and part of the program
@@ -87,6 +89,10 @@ app.use('/admin', isAuth, adminRoutes);
 
 // 404 page Middleware 
 app.use(errorController.get404);
+
+// error middleware (When next has an error as a param it will detect it automatically)
+app.use(errorController.get500);
+
 
 // ---------------------------------------------------
 //   OTHER HTTP REQUESTS THAT CAN BE USED WITH APP.:
@@ -143,4 +149,8 @@ sequelize.sync({
     app.listen(port);
     console.log(`Listening on port ${port}`);
 })
-.catch(err => console.log(err));
+.catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    });

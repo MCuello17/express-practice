@@ -59,13 +59,25 @@ exports.postLogin = (req, res, next) => {
                     req.session.isAuthenticated = true;
                     req.session.user = user;
                     return req.session.save((err) => {
-                        console.log(err);
+                        {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    };
                         res.redirect('/');
                     }); // TWe use the session.save method only when we need to excecute something AFTER the session info is saved.
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    })
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    });
 }
 
 exports.getSignup = (req, res, next) => {
@@ -109,12 +121,20 @@ exports.postSignup = (req, res, next) => {
                 html: '<h1>Signed up!</h1>'
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    });
 }
 
 exports.postLogout = (req, res, next) => {
     req.session.destroy((err) => {
-        console.log(err);
+        {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    };
         res.redirect('/');
     });
 }
@@ -130,7 +150,11 @@ exports.getResetPassword = (req, res, next) => {
 exports.postResetPassword = (req, res, next) => {
     crypto.randomBytes(32, (err, buffer) => {
         if (err) {
-            console.log(err);
+            {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    };
             return res.redirect('/reset-password');
         }
         const token = buffer.toString('hex');
@@ -154,7 +178,11 @@ exports.postResetPassword = (req, res, next) => {
                         <p>Click <a href="http://localhost:3000/reset-password/${ token }">this link</a> to set a new password</p>`
                 })
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    });
     })
 }
 
@@ -169,7 +197,11 @@ exports.getNewPassword = (req, res, next) => {
         if (!user) {
             req.flash('error', 'Invalid token');
             return req.session.save((err) => {
-                console.log(err);
+                {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    };
                 return res.redirect('/reset-password');
             });
         }
@@ -181,7 +213,11 @@ exports.getNewPassword = (req, res, next) => {
             token: token,
         });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    });
 }
 
 exports.postNewPassword = (req, res, next) => {
@@ -211,7 +247,11 @@ exports.postNewPassword = (req, res, next) => {
         if (!user) {
             req.flash('error', 'Invalid token');
             return req.session.save((err) => {
-                console.log(err);
+                {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    };
                 return res.redirect('/reset-password');
             });
         }
@@ -227,5 +267,9 @@ exports.postNewPassword = (req, res, next) => {
     .then(result => {
         res.redirect('/login');
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    });
 }
