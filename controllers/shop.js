@@ -1,5 +1,8 @@
-const Cart = require("../models/cart");
+const fs = require('fs');
+const path = require('path');
+
 const Product = require("../models/product");
+const Order = require("../models/order");
 
 exports.getCart = (req, res, next) => {
     req.user
@@ -81,13 +84,10 @@ exports.postCartDelete = (req, res, next) => {
     })
 };
 
-exports.getOrders = (req, res, next) => {
-    res.redirect('/');
-};
-
 exports.postCheckout = (req, res, next) => {
     let fetchedProducts;
     let fetchecCart;
+    let orderId;
     req.user
         .getCart()
         .then(cart => {
@@ -99,6 +99,7 @@ exports.postCheckout = (req, res, next) => {
             return req.user.createOrder();
         })
         .then (order => {
+            orderId = order.id;
             return order.addProducts(fetchedProducts.map(product => {
                 product.orderItem = {
                     quantity: product.cartItem.quantity,
@@ -111,12 +112,33 @@ exports.postCheckout = (req, res, next) => {
             return fetchecCart.setProducts(null);
         })
         .then (result => {
-            res.redirect('/orders');
+            res.redirect(`/orders/${orderId}`);
         })
         .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
     })
+};
+
+exports.getOrderInvoice = (req, res, next) => {
+    const orderId = req.params.orderId;
+
+    return Order.findByPk(orderId)
+        .then(order => {
+            console.log({order});
+            if (!order) return next(new Error("No order found"));
+            if (order.userId !== req.user.id) return next(new Error("Unauthorized"));
+            const invoiceName = `invoice-${orderId}.pdf`;
+            const invoicePath = path.join('data', 'invoices', invoiceName);
+        
+            fs.readFile(invoicePath, (err, data) => {
+                if (err) return next(err);
+                res.setHeader('Content-Type', 'application/pdf');
+                res.setHeader('Content-Disposition', `inline; filename="My Shop - ${ invoiceName }"`);
+                return res.send(data);
+            });
+        })
+        .catch(err => next(err));
 };

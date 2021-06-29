@@ -1,4 +1,4 @@
-# Express exercise (v8.1.0)
+# Express exercise (v8.3.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -57,6 +57,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * **(8.0.1)** Improved user experience with validation.
 * **(8.1.0)** Improved error handling.
 * **(8.2.0)** Added [multer](https://www.npmjs.com/package/multer) dependency for file uploading.
+* **(8.3.0)** Added invoice download on checkout.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)

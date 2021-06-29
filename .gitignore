@@ -2,3 +2,4 @@ lead.txt
 .DS_Store
 node_modules
 public/images/
+data/invoices

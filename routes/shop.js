@@ -23,7 +23,7 @@ router.post('/cart', isAuth, shopController.postCart);
 router.post('/cart/delete', isAuth, shopController.postCartDelete);
 
 // (GET)/cart => Orders list
-router.get('/orders', isAuth, shopController.getOrders);
+router.get('/orders/:orderId', isAuth, shopController.getOrderInvoice);
 
 // (POST)/checkout => Creates an order with items from cart
 router.post('/checkout', isAuth, shopController.postCheckout);
