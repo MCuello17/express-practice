@@ -160,19 +160,24 @@ exports.getOrderInvoice = (req, res, next) => {
 
             pdfDoc.end();
          
-            // Another way of serving files
+            // ---------------------------------------------------
+            //   ANOTHER WAY OF SERVING FILES:
+            // ---------------------------------------------------
+            // // PRELOADING THE DATA
             // fs.readFile(invoicePath, (err, data) => {
             //     if (err) return next(err);
             //     res.setHeader('Content-Type', 'application/pdf');
             //     res.setHeader('Content-Disposition', `inline; filename="My Shop - ${ invoiceName }"`);
             //     return res.send(data);
             // });
-
-            // Streaming a file
+            // 
+            //  // STREAMING THE DATA
             // const file = fs.createReadStream(invoicePath);
             // res.setHeader('Content-Type', 'application/pdf');
             // res.setHeader('Content-Disposition', `inline; filename="My Shop - ${ invoiceName }"`);
             // file.pipe(res);
+            // ---------------------------------------------------
+
 
         })
         .catch(err => next(err));
