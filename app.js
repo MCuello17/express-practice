@@ -4,6 +4,7 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const multer = require('multer');
 
 const sequelize = require('./utils/database');
 const errorController = require('./controllers/errors');
@@ -36,6 +37,28 @@ app.set('views', 'views/pages');
 
 // Parser Middleware
 app.use(express.urlencoded({extended: true}));
+
+// Multer Parser Middleware (file uploading parser)
+const fileStorage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, 'public/images');
+    },
+    filename: (req, file, callback) => {
+        callback(null, new Date().toISOString() + '-' + file.originalname);
+    },
+});
+
+const fileFilter = (req, file, callback) => {
+    callback(null,
+        (
+            file.mimetype === 'image/png' ||
+            file.mimetype === 'image/jpg' ||
+            file.mimetype === 'image/jpeg'
+        )
+    );
+}
+
+app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'));
 
 // Staric files Middleware (public/*)
 app.use(express.static(path.join(__dirname, 'public')));
@@ -152,5 +175,6 @@ sequelize.sync({
 .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     });

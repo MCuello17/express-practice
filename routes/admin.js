@@ -12,8 +12,8 @@ router.get('/new-product', productsController.getAddProduct);
 router.post('/new-product', [
     check('title', "The product title must be at least 5 characters long")
         .isLength({ min: 5 }),
-    check('imageUrl', "The product image must be a valid URL")
-        .isURL({ protocols: ['https'], require_protocol: true, }),
+    // check('imageUrl', "The product image must be a valid URL")
+    //     .isURL({ protocols: ['https'], require_protocol: true, }),
     check('currency', "The product currency must be a valid currency")
         .isLength({ min: 1 }),
     check('price')
@@ -37,8 +37,8 @@ router.get('/edit-product/:productId', productsController.getEditProduct);
 router.post('/edit-product', [
     check('title', "The product title must be at least 5 characters long")
         .isLength({ min: 5 }),
-    check('imageUrl', "The product image must be a valid URL")
-        .isURL({ protocols: ['https'], require_protocol: true, }),
+    // check('imageUrl', "The product image must be a valid URL")
+    //     .isURL({ protocols: ['https'], require_protocol: true, }),
     check('currency', "The product currency must be a valid currency")
         .isLength({ min: 1 }),
     check('price')

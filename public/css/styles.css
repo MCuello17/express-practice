@@ -66,6 +66,20 @@ section {
     width: 100%;
 }
 
+.form-control > input[type="file"] {
+    cursor: pointer;
+}
+
+.form-control > input[type="file"]::-webkit-file-upload-button {
+    background-color: transparent;
+    border: 0;
+    border-right: 1px solid #c4c4c4;
+    font-weight: 500;
+    cursor: pointer;
+    padding-right: 1rem;
+    margin-right: 1rem;
+}
+
 .form-control > input.warning,
 .form-control > textarea.warning,
 .form-control select.warning {

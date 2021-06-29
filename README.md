@@ -1,4 +1,4 @@
-# Express exercise (v8.1.0)
+# Express exercise (v8.4.1)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -56,6 +56,10 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * **(8.0.0)** Added [express-validator](https://www.npmjs.com/package/express-validator) dependency for user input validation ([docs](https://express-validator.github.io/docs/)).
 * **(8.0.1)** Improved user experience with validation.
 * **(8.1.0)** Improved error handling.
+* **(8.2.0)** Added [multer](https://www.npmjs.com/package/multer) dependency for file uploading.
+* **(8.3.0)** Added invoice download on checkout.
+* **(8.4.0)** Added [pdfkit](https://www.npmjs.com/package/pdfkit) dependency for invoice creation on checkout ([docs](https://pdfkit.org/index.html)).
+* **(8.4.1)** Minor fixes.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
@@ -69,6 +73,8 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * [connect-flash](https://www.npmjs.com/package/connect-flash)
 * [nodemailer](https://www.npmjs.com/package/nodemailer)
 * [express-validator](https://www.npmjs.com/package/express-validator)
+* [multer](https://www.npmjs.com/package/multer)
+* [pdfkit](https://www.npmjs.com/package/pdfkit)
 ## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 

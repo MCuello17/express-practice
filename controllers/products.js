@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator/check');
 
 const Product = require('../models/product');
+const fileHelper = require('../utils/file');
 
 exports.getAddProduct = (req, res, next) => {
     res.render('admin/product-form', {
@@ -10,7 +11,25 @@ exports.getAddProduct = (req, res, next) => {
 }
 
 exports.postAddProduct = (req, res, next) => {
-    const {title, imageUrl, description, currency, price, stock} = req.body;
+    const {title, description, currency, price, stock} = req.body;
+    const image = req.file;
+
+    if (!image) {
+        return res.status(422).render('admin/product-form', {
+            pageTitle: 'Create a new product - My Shop!',
+            errorMessage: "Invalid image file uploaded",
+            validationErrors: [],
+            oldInput: { 
+                title: title,
+                price: price,
+                currency: currency,
+                description: description,
+                stock: stock,
+            },
+        }); 
+    }
+
+    const imagePath = image.filename;
 
     const errors = validationResult(req);
 
@@ -23,7 +42,6 @@ exports.postAddProduct = (req, res, next) => {
                 title: title,
                 price: price,
                 currency: currency,
-                imageUrl: imageUrl,
                 description: description,
                 stock: stock,
             },
@@ -34,7 +52,7 @@ exports.postAddProduct = (req, res, next) => {
         title: title,
         price: price,
         currency: currency,
-        imageUrl: imageUrl,
+        image: imagePath,
         description: description,
         stock: stock,
     })
@@ -44,6 +62,7 @@ exports.postAddProduct = (req, res, next) => {
     .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     });
 }
@@ -59,6 +78,7 @@ exports.getProducts = (req, res, next) => {
     .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     });
 }
@@ -82,6 +102,7 @@ exports.getProduct = (req, res, next) => {
     .catch(err => {{
         const error = new Error(err);
         error.httpStatusCode = 500;
+        console.log(error);
         return next(error);
     }});
 };
@@ -101,15 +122,18 @@ exports.getEditProduct = (req, res, next) => {
             });
         })
         .catch(err => {{
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-    }});
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
+        }});
 };
 
 
 exports.postEditProduct = (req, res, next) => {
-    const {productId, title, imageUrl, description, currency, price, stock} = req.body;
+    const {productId, title, description, currency, price, stock} = req.body;
+    
+    const image = req.file;
 
     const errors = validationResult(req);
 
@@ -122,7 +146,6 @@ exports.postEditProduct = (req, res, next) => {
                 title: title,
                 price: price,
                 currency: currency,
-                imageUrl: imageUrl,
                 description: description,
                 stock: stock,
             },
@@ -133,8 +156,15 @@ exports.postEditProduct = (req, res, next) => {
         .getProducts({where: {id: productId}})
         .then(([product]) => {
             if (!product) res.redirect('/');
+
+            let imagePath = product.image;
+            if (image) {
+                fileHelper.deleteFile(`/public/images/${product.image}`);
+                imagePath = image.filename;
+            }
+
             product.title = title;
-            product.imageUrl = imageUrl;
+            product.image = imagePath;
             product.description = description;
             product.currency = currency;
             product.price = price;
@@ -145,10 +175,11 @@ exports.postEditProduct = (req, res, next) => {
             res.redirect(`/products/${ product.id }`);
         })
         .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-    })
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
+        })
 };
 
 exports.postDeleteProduct = (req, res, next) => {
@@ -157,15 +188,17 @@ exports.postDeleteProduct = (req, res, next) => {
         .getProducts({where: {id: productId}})
         .then(([product]) => {
             if (!product) res.redirect('/');
+            fileHelper.deleteFile(`public/images/${product.image}`);
             return product.destroy();
         })
         .then(product => {
             res.redirect('/');
         })
         .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-    })
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
+        })
 };
 

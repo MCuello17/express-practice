@@ -1,6 +1,6 @@
 {
   "name": "express-practice",
-  "version": "8.1.0",
+  "version": "8.4.1",
   "description": "Express practice excersise!",
   "main": "app.js",
   "dependencies": {
@@ -12,8 +12,10 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "express-validator": "^6.12.0",
+    "multer": "^1.4.2",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.6.2",
+    "pdfkit": "^0.12.1",
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
