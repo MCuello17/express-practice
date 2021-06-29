@@ -4,6 +4,11 @@
     <main>
         <section id="new-product">
             <h1>Add new product</h1>
+            <% if (errorMessage) { %>
+                <div class="flash-message error">
+                    <%= errorMessage %>
+                </div>
+            <% } %>
             <form
                 <% if (typeof product !== 'undefined') { %>
                     action="/admin/edit-product"
@@ -16,8 +21,13 @@
                     <label for="product-title">Title</label>
                     <input
                         id="product-title"
-                        <% if (typeof product !== 'undefined') { %>
+                        <% if (typeof oldInput !== 'undefined') { %>
+                            value="<%= oldInput.title %>"
+                        <% } else if (typeof product !== 'undefined') { %>
                             value="<%= product.title %>"
+                        <% } %>
+                        <% if (typeof validationErrors !== 'undefined') {%>
+                            class="<%= validationErrors.find(e => e.param === 'title') ? 'warning' : '' %>"
                         <% } %>
                         type="text"
                         name="title"
@@ -27,8 +37,13 @@
                     <label for="product-image">Image URL</label>
                     <input
                         id="product-image"
-                        <% if (typeof product !== 'undefined') { %>
+                        <% if (typeof oldInput !== 'undefined') { %>
+                            value="<%= oldInput.imageUrl %>"
+                        <% } else if (typeof product !== 'undefined') { %>
                             value="<%= product.imageUrl %>"
+                        <% } %>
+                        <% if (typeof validationErrors !== 'undefined') {%>
+                            class="<%= validationErrors.find(e => e.param === 'imageUrl') ? 'warning' : '' %>"
                         <% } %>
                         type="text"
                         name="imageUrl"
@@ -37,9 +52,16 @@
                 <div class="form-control">
                     <label for="product-currency">Currency</label>
                     <div class="custom-select">
-                        <select name="currency" id="product-currency">
+                        <select
+                            name="currency"
+                            <% if (typeof validationErrors !== 'undefined') {%>
+                                class="<%= validationErrors.find(e => e.param === 'currency') ? 'warning' : '' %>"
+                            <% } %>
+                            id="product-currency">
                             <option
-                                <% if (typeof product !== 'undefined') { %>
+                                <% if (typeof oldInput !== 'undefined') { %>
+                                    <%= oldInput.currency === '$' ? 'selected' : '' %> 
+                                <% } else if (typeof product !== 'undefined') { %>
                                     <%= product.currency === '$' ? 'selected' : '' %> 
                                 <% } %>
                                 value="$">
@@ -52,8 +74,13 @@
                     <label for="product-price">Price</label>
                     <input
                         id="product-price"
-                        <% if (typeof product !== 'undefined') { %>
+                        <% if (typeof oldInput !== 'undefined') { %>
+                            value="<%= oldInput.price %>"
+                        <% } else if (typeof product !== 'undefined') { %>
                             value="<%= product.price %>"
+                        <% } %>
+                        <% if (typeof validationErrors !== 'undefined') {%>
+                            class="<%= validationErrors.find(e => e.param === 'price') ? 'warning' : '' %>"
                         <% } %>
                         type="number"
                         step=".01"
@@ -63,18 +90,26 @@
                 <div class="form-control">
                     <label for="product-description">Description</label>
                     <textarea
+                        <% if (typeof validationErrors !== 'undefined') {%>
+                            class="<%= validationErrors.find(e => e.param === 'description') ? 'warning' : '' %>"
+                        <% } %>
                         id="product-description"
                         name="description"
                         cols="30"
                         rows="5"
-                        placeholder="Black case for 13 inches laptops"><% if (typeof product !== 'undefined') { %><%= product.description %><% } %></textarea>
+                        placeholder="Black case for 13 inches laptops"><% if (typeof oldInput !== 'undefined') { %><%= oldInput.description %><% } else if  (typeof product !== 'undefined') { %><%= product.description %><% } %></textarea>
                 </div>
                 <div class="form-control">
                     <label for="product-stock">Stock</label>
                     <input
                         id="product-stock"
-                        <% if (typeof product !== 'undefined') { %>
+                        <% if (typeof oldInput !== 'undefined') { %>
+                            value="<%= oldInput.stock %>"
+                        <% } else if (typeof product !== 'undefined') { %>
                             value="<%= product.stock %>"
+                        <% } %>
+                        <% if (typeof validationErrors !== 'undefined') {%>
+                            class="<%= validationErrors.find(e => e.param === 'stock') ? 'warning' : '' %>"
                         <% } %>
                         type="number"
                         name="stock"

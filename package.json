@@ -1,6 +1,6 @@
 {
   "name": "express-practice",
-  "version": "7.4.1",
+  "version": "8.0.1",
   "description": "Express practice excersise!",
   "main": "app.js",
   "dependencies": {

@@ -1,13 +1,35 @@
+const { validationResult } = require('express-validator/check');
+
 const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
     res.render('admin/product-form', {
         pageTitle: 'Create a new product - My Shop!',
+        errorMessage: req.flash('error')[0],
     });
 }
 
 exports.postAddProduct = (req, res, next) => {
     const {title, imageUrl, description, currency, price, stock} = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).render('admin/product-form', {
+            pageTitle: 'Create a new product - My Shop!',
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array(),
+            oldInput: { 
+                title: title,
+                price: price,
+                currency: currency,
+                imageUrl: imageUrl,
+                description: description,
+                stock: stock,
+            },
+        });
+    }
+
     req.user.createProduct({
         title: title,
         price: price,
@@ -62,7 +84,8 @@ exports.getEditProduct = (req, res, next) => {
             }
             res.render('admin/product-form', {
                 pageTitle: 'Create a new product - My Shop!',
-                product: product
+                product: product,
+                errorMessage: req.flash('error')[0],
             });
         })
         .catch(err => {console.log(err)});
@@ -71,6 +94,25 @@ exports.getEditProduct = (req, res, next) => {
 
 exports.postEditProduct = (req, res, next) => {
     const {productId, title, imageUrl, description, currency, price, stock} = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).render('admin/product-form', {
+            pageTitle: 'Create a new product - My Shop!',
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array(),
+            oldInput: { 
+                title: title,
+                price: price,
+                currency: currency,
+                imageUrl: imageUrl,
+                description: description,
+                stock: stock,
+            },
+        });
+    }
+
     req.user
         .getProducts({where: {id: productId}})
         .then(([product]) => {

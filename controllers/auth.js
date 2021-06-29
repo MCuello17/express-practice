@@ -20,7 +20,6 @@ exports.postLogin = (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        console.log(errors.array());
         return res.status(422).render('auth/login', {
             pageTitle: 'Login - My Shop!',
             pageID: 'auth',
@@ -35,7 +34,6 @@ exports.postLogin = (req, res, next) => {
             if (!user) {
                 req.flash('error', 'Invalid email or password');
                 return req.session.save((err) => {
-                    console.log(err);
                     return res.status(422).render('auth/login', {
                         pageTitle: 'Login - My Shop!',
                         pageID: 'auth',
@@ -49,7 +47,6 @@ exports.postLogin = (req, res, next) => {
                 .then(doMatch => {
                     if (!doMatch) {
                         return req.session.save((err) => {
-                            console.log(err);
                             return res.status(422).render('auth/login', {
                                 pageTitle: 'Login - My Shop!',
                                 pageID: 'auth',
@@ -84,7 +81,6 @@ exports.postSignup = (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        console.log(errors.array());
         return res.status(422).render('auth/signup', {
             pageTitle: 'Signup - My Shop!',
             pageID: 'auth',
