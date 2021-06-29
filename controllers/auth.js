@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const { Op } = require('sequelize');
+const { validationResult } = require('express-validator/check')
 
 const User = require('../models/user');
 const transpoerter = require('../utils/mailer')
@@ -15,22 +16,44 @@ exports.getLogin = (req, res, next) => {
 
 exports.postLogin = (req, res, next) => {
     const {email, password} = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).render('auth/login', {
+            pageTitle: 'Login - My Shop!',
+            pageID: 'auth',
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array(),
+            oldInput: { email: email, password: password },
+        });
+    }
+
     User.findAll({where: {email: email}})
         .then(([user]) => {
             if (!user) {
                 req.flash('error', 'Invalid email or password');
                 return req.session.save((err) => {
-                    console.log(err);
-                    return res.redirect('/login');
+                    return res.status(422).render('auth/login', {
+                        pageTitle: 'Login - My Shop!',
+                        pageID: 'auth',
+                        errorMessage: "Invalid email or password",
+                        validationErrors: [{param: 'email'}, {param: 'password'}],
+                        oldInput: { email: email, password: password },
+                    });
                 });
             }
             bcrypt.compare(password, user.password)
                 .then(doMatch => {
                     if (!doMatch) {
-                        req.flash('error', 'Invalid email or password');
                         return req.session.save((err) => {
-                            console.log(err);
-                            return res.redirect('/login');
+                            return res.status(422).render('auth/login', {
+                                pageTitle: 'Login - My Shop!',
+                                pageID: 'auth',
+                                errorMessage: "Invalid email or password",
+                                validationErrors: [{param: 'email'}, {param: 'password'}],
+                                oldInput: { email: email, password: password },
+                            });
                         });
                     }
                     req.session.isAuthenticated = true;
@@ -54,34 +77,36 @@ exports.getSignup = (req, res, next) => {
 };
 
 exports.postSignup = (req, res, next) => {
-    const {email, password, confirmPassword} = req.body;
-    User.findAll({where: {email: email}})
-        .then(([user]) => {
-            if (user) {
-                req.flash('error', 'Email already exists');
-                return req.session.save((err) => {
-                    console.log(err);
-                    return res.redirect('/signup');
-                });
-            }
-            return bcrypt.hash(password, 12)
-            .then(hashedPassword => {
-                return User.create({
-                    email: email,
-                    password: hashedPassword,
-                });
-            })
-            .then(user => {
-                return user.createCart();
-            })
-            .then(result => {
-                res.redirect('/login')
-                return transpoerter.sendMail({
-                    to: email,
-                    from: 'myshop@express.com',
-                    subject: 'Signed up',
-                    html: '<h1>Signed up!</h1>'
-                });
+    const { email, password, confirmPassword } = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).render('auth/signup', {
+            pageTitle: 'Signup - My Shop!',
+            pageID: 'auth',
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array(),
+            oldInput: { email: email, password: password, confirmPassword: confirmPassword },
+        });
+    }
+
+    bcrypt.hash(password, 12)
+        .then(hashedPassword => {
+            return User.create({
+                email: email,
+                password: hashedPassword,
+            });
+        })
+        .then(user => {
+            return user.createCart();
+        })
+        .then(result => {
+            res.redirect('/login')
+            return transpoerter.sendMail({
+                to: email,
+                from: 'myshop@express.com',
+                subject: 'Signed up',
+                html: '<h1>Signed up!</h1>'
             });
         })
         .catch(err => console.log(err));
@@ -160,7 +185,22 @@ exports.getNewPassword = (req, res, next) => {
 }
 
 exports.postNewPassword = (req, res, next) => {
-    const {password: newPassword, token, userId} = req.body;
+    const {password: newPassword, token, userId, confirmPassword} = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.status(422).render('auth/new-password', {
+            pageTitle: 'Reset password - My Shop!',
+            pageID: 'auth',
+            userId: userId,
+            token: token,
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array(),
+            oldInput: { password: newPassword, confirmPassword: confirmPassword }
+        });
+    }
+
     let fetchedUser;
     User.findAll({ where: {
         id: userId,

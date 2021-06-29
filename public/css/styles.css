@@ -66,6 +66,13 @@ section {
     width: 100%;
 }
 
+.form-control > input.warning,
+.form-control > textarea.warning,
+.form-control select.warning {
+    border-color: #ff4949;
+    background-color: #ffd7d7;
+}
+
 .form-control select {
     -moz-appearance: none;
     -webkit-appearance: none;

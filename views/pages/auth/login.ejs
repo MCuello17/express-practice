@@ -12,11 +12,26 @@
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="form-control">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="example@email.com">
+                    <input
+                        <% if (typeof validationErrors !== 'undefined') {%>
+                            class="<%= validationErrors.find(e => e.param === 'email') ? 'warning' : '' %>"
+                        <% } %>
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="example@email.com"
+                        value="<%= typeof oldInput !== 'undefined' ? oldInput.email : '' %>">
                 </div>
                 <div class="form-control">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password">
+                    <input
+                        <% if (typeof validationErrors !== 'undefined') {%>
+                            class="<%= validationErrors.find(e => e.param === 'password') ? 'warning' : '' %>"
+                        <% } %>
+                        type="password"
+                        name="password"
+                        id="password"
+                        value="<%= typeof oldInput !== 'undefined' ? oldInput.password : '' %>">
                 </div>
                 <div class="form-control link">
                     <a href="/reset-password">Forgot you password?</a>
