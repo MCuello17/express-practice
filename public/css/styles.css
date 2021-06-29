@@ -269,6 +269,32 @@ section {
     border-color: #000;
 }
 
+#shop .pagination {
+    display: block;
+    margin: 1rem auto 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#shop .pagination a {
+    border: 1px solid #e8e8e8;
+    background: #fff;
+    text-decoration: none;
+    color: #b8b8b8;
+    padding: .5rem .8rem;
+    margin: 0 .2rem;
+}
+
+#shop .pagination a:hover {
+    color: #3d3d3d;
+    box-shadow: 0px 0 5px 0px #e8e8e8;
+}
+
+#shop .pagination a.active {
+    color: #000;
+}
+
     /* Small devices (landscape phones, 576px and up) */
     @media (min-width: 576px) {
         #shop > ul {
