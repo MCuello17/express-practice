@@ -59,28 +59,28 @@ exports.postLogin = (req, res, next) => {
                     req.session.isAuthenticated = true;
                     req.session.user = user;
                     return req.session.save((err) => {
-                        {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    };
+                        if (err) {
+                            const error = new Error(err);
+                            error.httpStatusCode = 500;
+                            console.log(error);
+                            return next(error);
+                        }
                         res.redirect('/');
                     }); // TWe use the session.save method only when we need to excecute something AFTER the session info is saved.
                 })
                 .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    })
-        })
-        .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    });
+                    const error = new Error(err);
+                    error.httpStatusCode = 500;
+                    console.log(error);
+                    return next(error);
+                })
+            })
+            .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
+        });
 }
 
 exports.getSignup = (req, res, next) => {
@@ -134,12 +134,12 @@ exports.postSignup = (req, res, next) => {
 
 exports.postLogout = (req, res, next) => {
     req.session.destroy((err) => {
-        {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    };
+        if (err) {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
+        };
         res.redirect('/');
     });
 }
@@ -155,13 +155,10 @@ exports.getResetPassword = (req, res, next) => {
 exports.postResetPassword = (req, res, next) => {
     crypto.randomBytes(32, (err, buffer) => {
         if (err) {
-            {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    };
-            return res.redirect('/reset-password');
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
         }
         const token = buffer.toString('hex');
         User.findAll({where: { email: req.body.email }})
@@ -185,11 +182,11 @@ exports.postResetPassword = (req, res, next) => {
                 })
             })
             .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    });
+                const error = new Error(err);
+                error.httpStatusCode = 500;
+                console.log(error);
+                return next(error);
+            });
     })
 }
 
@@ -204,12 +201,6 @@ exports.getNewPassword = (req, res, next) => {
         if (!user) {
             req.flash('error', 'Invalid token');
             return req.session.save((err) => {
-                {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    };
                 return res.redirect('/reset-password');
             });
         }
@@ -256,12 +247,6 @@ exports.postNewPassword = (req, res, next) => {
         if (!user) {
             req.flash('error', 'Invalid token');
             return req.session.save((err) => {
-                {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    };
                 return res.redirect('/reset-password');
             });
         }
