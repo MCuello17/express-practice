@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator/check');
 
 const Product = require('../models/product');
+const fileHelper = require('../utils/file');
 
 exports.getAddProduct = (req, res, next) => {
     res.render('admin/product-form', {
@@ -121,11 +122,11 @@ exports.getEditProduct = (req, res, next) => {
             });
         })
         .catch(err => {{
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    }});
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
+        }});
 };
 
 
@@ -157,7 +158,10 @@ exports.postEditProduct = (req, res, next) => {
             if (!product) res.redirect('/');
 
             let imagePath = product.image;
-            if (image) imagePath = image.filename;
+            if (image) {
+                fileHelper.deleteFile(`/public/images/${product.image}`);
+                imagePath = image.filename;
+            }
 
             product.title = title;
             product.image = imagePath;
@@ -171,11 +175,11 @@ exports.postEditProduct = (req, res, next) => {
             res.redirect(`/products/${ product.id }`);
         })
         .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    })
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
+        })
 };
 
 exports.postDeleteProduct = (req, res, next) => {
@@ -184,16 +188,17 @@ exports.postDeleteProduct = (req, res, next) => {
         .getProducts({where: {id: productId}})
         .then(([product]) => {
             if (!product) res.redirect('/');
+            fileHelper.deleteFile(`public/images/${product.image}`);
             return product.destroy();
         })
         .then(product => {
             res.redirect('/');
         })
         .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    })
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
+        })
 };
 

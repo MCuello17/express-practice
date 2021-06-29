@@ -171,7 +171,7 @@ exports.getOrderInvoice = (req, res, next) => {
             //     return res.send(data);
             // });
             // 
-            //  // STREAMING THE DATA
+            // // STREAMING THE DATA
             // const file = fs.createReadStream(invoicePath);
             // res.setHeader('Content-Type', 'application/pdf');
             // res.setHeader('Content-Disposition', `inline; filename="My Shop - ${ invoiceName }"`);
