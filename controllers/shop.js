@@ -155,6 +155,7 @@ exports.getOrderInvoice = (req, res, next) => {
                 totalPrice = totalPrice + product.orderItem.totalPrice;
                 pdfDoc.fontSize(16).text(`${product.title} (${product.orderItem.quantity} x ${product.currency + product.price}) - ${product.currency + product.orderItem.totalPrice}`);
             });
+            totalPrice = Math.round(totalPrice * 100)/100;
             pdfDoc.fontSize(26).text('-----------------------');
             pdfDoc.fontSize(20).text(`Total: $${totalPrice}`);
 
