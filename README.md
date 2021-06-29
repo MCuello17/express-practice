@@ -1,4 +1,4 @@
-# Express exercise (v8.4.1)
+# Express exercise (v8.5.0)
 This is an express practice exercise.
 
 To run the server simply write the following in your terminal:
@@ -60,6 +60,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * **(8.3.0)** Added invoice download on checkout.
 * **(8.4.0)** Added [pdfkit](https://www.npmjs.com/package/pdfkit) dependency for invoice creation on checkout ([docs](https://pdfkit.org/index.html)).
 * **(8.4.1)** Minor fixes.
+* **(8.5.0)** Pagination.
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)

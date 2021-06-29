@@ -3,6 +3,8 @@ const { validationResult } = require('express-validator/check');
 const Product = require('../models/product');
 const fileHelper = require('../utils/file');
 
+const ITEMS_PER_PAGE = 8;
+
 exports.getAddProduct = (req, res, next) => {
     res.render('admin/product-form', {
         pageTitle: 'Create a new product - My Shop!',
@@ -68,19 +70,36 @@ exports.postAddProduct = (req, res, next) => {
 }
 
 exports.getProducts = (req, res, next) => {
-    Product.findAll()
-    .then(products => {
-        res.render('shop/product-list', {
-            products: products,
-            pageID: 'shop',
+    const currentPage = +req.query.page || 1;
+    let totalItems;
+
+    Product.count()
+        .then(numProducts => {
+            totalItems = numProducts;
+            return Product.findAll({
+                limit: ITEMS_PER_PAGE,
+                offset: ((currentPage-1) * ITEMS_PER_PAGE)
+            })
+        })
+        .then(products => {
+            res.render('shop/product-list', {
+                products: products,
+                pageID: 'shop',
+                currentPage: currentPage,
+                totalProducts: totalItems,
+                hasNextPage: ITEMS_PER_PAGE * currentPage < totalItems,
+                hasPreviousPage: currentPage > 1,
+                nextPage: currentPage + 1,
+                previousPage: currentPage - 1,
+                lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
+            });
+        })
+        .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            console.log(error);
+            return next(error);
         });
-    })
-    .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        console.log(error);
-        return next(error);
-    });
 }
 
 exports.getProduct = (req, res, next) => {
