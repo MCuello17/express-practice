@@ -58,6 +58,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * **(8.1.0)** Improved error handling.
 * **(8.2.0)** Added [multer](https://www.npmjs.com/package/multer) dependency for file uploading.
 * **(8.3.0)** Added invoice download on checkout.
+* **(8.4.0)** Added [pdfkit](https://www.npmjs.com/package/pdfkit) dependency for invoice creation on checkout ([docs](https://pdfkit.org/index.html)).
 
 ## Dependencies:
 * [Express](https://www.npmjs.com/package/express)
@@ -72,6 +73,7 @@ You can also **Add products to your cart**, **order**, and **delete them**.
 * [nodemailer](https://www.npmjs.com/package/nodemailer)
 * [express-validator](https://www.npmjs.com/package/express-validator)
 * [multer](https://www.npmjs.com/package/multer)
+* [pdfkit](https://www.npmjs.com/package/pdfkit)
 ## Dev Dependencies:
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 
